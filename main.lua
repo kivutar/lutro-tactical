@@ -52,6 +52,7 @@ function love.update(dt)
 			CHARS[i].at = CHARS[i].at - 1
 			if CHARS[i].at == 0 then
 				TIME_RUNNING = false
+				CHAR_IDX = i
 			end
 		end
 	end

@@ -20,6 +20,8 @@ THH=24/2
 
 CHARS = {}
 
+CHAR_IDX = 0
+
 TIME_RUNNING = true
 
 MENU = nil

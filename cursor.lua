@@ -42,9 +42,11 @@ function cursor:update(dt)
 			if destination ~= nil then
 				local path = {}
 				BuildPath(path, destination)
-				CHARS[1]:move(path)
+				CHARS[CHAR_IDX]:move(path)
 				MOVABLES = nil
 				MENU = nil
+				CHARS[CHAR_IDX].at = CHARS[CHAR_IDX].period
+				TIME_RUNNING = true
 			end
 		else
 			for i = 1, #CHARS do
