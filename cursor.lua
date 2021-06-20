@@ -14,8 +14,8 @@ function cursor:update(dt)
 	local JOY_RIGHT = love.joystick.isDown(1, RETRO_DEVICE_ID_JOYPAD_RIGHT)
 	local JOY_DOWN  = love.joystick.isDown(1, RETRO_DEVICE_ID_JOYPAD_DOWN)
 	local JOY_UP    = love.joystick.isDown(1, RETRO_DEVICE_ID_JOYPAD_UP)
-	local JOY_A    = love.joystick.isDown(1, RETRO_DEVICE_ID_JOYPAD_A)
-	local JOY_B    = love.joystick.isDown(1, RETRO_DEVICE_ID_JOYPAD_B)
+	local JOY_A     = love.joystick.isDown(1, RETRO_DEVICE_ID_JOYPAD_A)
+	local JOY_B     = love.joystick.isDown(1, RETRO_DEVICE_ID_JOYPAD_B)
 
 	if JOY_DOWN and self.cooldown == 0 then
 		self.y = self.y + 1

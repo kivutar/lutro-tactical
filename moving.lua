@@ -20,15 +20,6 @@ function BuildPath(path, tile)
 	end
 end
 
-function TileExists(list, item)
-	for i = 1, #list do
-		if list[i].x == item.x and list[i].y == item.y then
-			return true
-		end
-	end
-	return false
-end
-
 function TileIn(list, item)
 	for i = 1, #list do
 		if list[i].x == item.x and list[i].y == item.y then
@@ -51,16 +42,16 @@ function GetMovable(x, y)
 	return {x=x, y=y}
 end
 
-function AddToList(pos, list, movement)
-	movement = movement - 1
-	if movement <= 0 then return end
+function AddToList(pos, list, moves)
+	moves = moves - 1
+	if moves <= 0 then return end
 	for i = 1, #around do
 		local delta = around[i]
 		local adjacent = GetMovable(pos.x + delta.x, pos.y + delta.y)
-		if adjacent ~= nil and not TileExists(list, adjacent) then
+		if adjacent ~= nil then
 			adjacent.parent = pos
 			table.insert(list, adjacent)
-			AddToList(adjacent, list, movement)
+			AddToList(adjacent, list, moves)
 		end
 	end
 end
