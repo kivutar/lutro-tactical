@@ -26,5 +26,6 @@ function character:update(dt)
 end
 
 function character:draw()
+	love.graphics.draw(IMG_shadow, self.x*THW - self.y*THW - 10 + THW, self.x*THH + self.y*THH + 30)
 	self.anim:draw(self.x*THW - self.y*THW - 10 + THW, self.x*THH + self.y*THH + 8)
 end

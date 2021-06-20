@@ -36,21 +36,22 @@ MAP = {
 }
 
 function love.load()
-	IMG_grass = love.graphics.newImage("grass4.png")
-	IMG_water = love.graphics.newImage("water4.png")
+	IMG_grass = love.graphics.newImage("assets/grass4.png")
+	IMG_water = love.graphics.newImage("assets/water4.png")
 
-	IMG_cursor = love.graphics.newImage("cursor.png")
-	IMG_bg = love.graphics.newImage("bg.png")
+	IMG_cursor = love.graphics.newImage("assets/cursor.png")
+	IMG_bg = love.graphics.newImage("assets/bg.png")
+	IMG_shadow = love.graphics.newImage("assets/shadow.png")
 
-	IMG_knight_stand_south = love.graphics.newImage("knight_stand_south.png")
-	IMG_knight_stand_north = love.graphics.newImage("knight_stand_north.png")
-	IMG_knight_stand_west = love.graphics.newImage("knight_stand_west.png")
-	IMG_knight_stand_east = love.graphics.newImage("knight_stand_east.png")
+	IMG_knight_stand_south = love.graphics.newImage("assets/knight_stand_south.png")
+	IMG_knight_stand_north = love.graphics.newImage("assets/knight_stand_north.png")
+	IMG_knight_stand_west = love.graphics.newImage("assets/knight_stand_west.png")
+	IMG_knight_stand_east = love.graphics.newImage("assets/knight_stand_east.png")
 
-	IMG_knight_walk_south = love.graphics.newImage("knight_walk_south.png")
-	IMG_knight_walk_north = love.graphics.newImage("knight_walk_north.png")
-	IMG_knight_walk_west = love.graphics.newImage("knight_walk_west.png")
-	IMG_knight_walk_east = love.graphics.newImage("knight_walk_east.png")
+	IMG_knight_walk_south = love.graphics.newImage("assets/knight_walk_south.png")
+	IMG_knight_walk_north = love.graphics.newImage("assets/knight_walk_north.png")
+	IMG_knight_walk_west = love.graphics.newImage("assets/knight_walk_west.png")
+	IMG_knight_walk_east = love.graphics.newImage("assets/knight_walk_east.png")
 
 	table.insert(CHARS, NewCharacter({x=2, y=2, direction=1}))
 	table.insert(CHARS, NewCharacter({x=2, y=1, direction=3}))
