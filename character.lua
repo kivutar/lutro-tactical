@@ -4,7 +4,8 @@ character.__index = character
 function NewCharacter(n)
 	n.stance = "walk"
 	n.at = n.period
-	n.movement = 3
+	n.movement = 5
+	n.tweens = {}
 	n.animations = {
 		stand = {
 			[0] = NewAnimation(IMG_knight_stand_north,  20, 32, 1, 10),
@@ -25,6 +26,18 @@ end
 
 function character:update(dt)
 	self.anim:update(dt)
+	if #self.tweens > 0 then
+		if self.tweens[1]:update(dt) then
+			table.remove(self.tweens, 1)
+		end
+	end
+end
+
+function character:move(path)
+	table.remove(path, 1)
+	for i = 1, #path do
+		table.insert(self.tweens, Tween.new(0.5, self, {x=path[i].x, y=path[i].y}, 'linear'))
+	end
 end
 
 function character:draw()

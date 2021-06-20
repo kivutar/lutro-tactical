@@ -3,6 +3,7 @@ require "anim"
 require "cursor"
 require "character"
 require "menu"
+Tween = require "tween"
 
 MAP = {
 	{0,0,0,0,0,0,0,0},

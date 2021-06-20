@@ -3,13 +3,30 @@ menu.__index = menu
 
 local around = {{x=-1,y=0},{x=1,y=0},{x=0,y=-1},{x=0,y=1}}
 
+function BuildPath(path, tile)
+	--print(tile.x, tile.y)
+	table.insert(path, 1, tile)
+	if tile.parent then
+		BuildPath(path, tile.parent)
+	end
+end
+
 function TileExists(list, item)
-	for i=1, #list do
+	for i = 1, #list do
 		if list[i].x == item.x and list[i].y == item.y then
 			return true
 		end
 	end
 	return false
+end
+
+function TileIn(list, item)
+	for i = 1, #list do
+		if list[i].x == item.x and list[i].y == item.y then
+			return list[i]
+		end
+	end
+	return nil
 end
 
 function GetMovable(x, y)
@@ -32,6 +49,7 @@ function AddToList(pos, list, movement)
 		local delta = around[i]
 		local adjacent = GetMovable(pos.x + delta.x, pos.y + delta.y)
 		if adjacent ~= nil and not TileExists(list, adjacent) then
+			adjacent.parent = pos
 			table.insert(list, adjacent)
 			AddToList(adjacent, list, movement)
 		end

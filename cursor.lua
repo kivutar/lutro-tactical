@@ -37,8 +37,12 @@ function cursor:update(dt)
 		self.cooldown = 10
 
 		if MOVABLES ~= nil then
-			if TileExists(MOVABLES, self) then
+			local destination = TileIn(MOVABLES, self)
+			if destination ~= nil then
 				MOVABLES = nil
+				local path = {}
+				BuildPath(path, destination)
+				CHARS[1]:move(path)
 			end
 		else
 			for i = 1, #CHARS do
