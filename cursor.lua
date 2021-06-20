@@ -39,15 +39,16 @@ function cursor:update(dt)
 		if MOVABLES ~= nil then
 			local destination = TileIn(MOVABLES, self)
 			if destination ~= nil then
-				MOVABLES = nil
 				local path = {}
 				BuildPath(path, destination)
 				CHARS[1]:move(path)
+				MOVABLES = nil
+				MENU = nil
 			end
 		else
 			for i = 1, #CHARS do
 				local char = CHARS[i]
-				if char.x == self.x and char.y == self.y then
+				if char.x == self.x and char.y == self.y and char.at == 0 then
 					MENU = NewMenu({char = char})
 				end
 			end

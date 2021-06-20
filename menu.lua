@@ -31,7 +31,7 @@ end
 
 function GetMovable(x, y)
 	if y <= 0 or y > #MAP then return nil end
-	if x <= 0 or x > #MAP[1] then return nil end
+	if x <= 0 or x > #MAP then return nil end
 	if MAP[y][x] == 0 then return nil end
 	for i = 1, #CHARS do
 		local c = CHARS[i]

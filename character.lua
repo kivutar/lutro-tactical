@@ -38,16 +38,23 @@ function GetNewDirection(x1, y1, x2, y2)
 	local dy = y2 - y1
 
 	if (math.abs(dy) > math.abs(dx)) then
-		if dy > 0 then return DIR_SOUTH else return DIR_NORTH end
+		if dy > 0 then return DIR_WEST else return DIR_EAST end
 	else
-		if dx > 0 then return DIR_WEST else return DIR_EAST end
+		if dx > 0 then return DIR_SOUTH else return DIR_NORTH end
 	end
 end
 
 function character:move(path)
-	table.remove(path, 1)
+	local last = table.remove(path, 1)
 	for i = 1, #path do
-		table.insert(self.tweens, Tween.new(0.3, self, {x=path[i].x, y=path[i].y}, 'linear'))
+		local current = path[i]
+		local nextdir = GetNewDirection(last.x, last.y, current.x, current.y)
+		local cb = function (n)
+			n.direction = nextdir
+			n.anim = n.animations[n.stance][n.direction]
+		end
+		table.insert(self.tweens, Tween.new(0.3, self, {x=current.x, y=current.y}, 'linear', cb))
+		last = current
 	end
 end
 
