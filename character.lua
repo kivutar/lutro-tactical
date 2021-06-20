@@ -4,6 +4,7 @@ character.__index = character
 function NewCharacter(n)
 	n.stance = "walk"
 	n.at = n.period
+	n.movement = 3
 	n.animations = {
 		stand = {
 			[0] = NewAnimation(IMG_knight_stand_north,  20, 32, 1, 10),

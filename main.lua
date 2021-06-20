@@ -23,6 +23,7 @@ function love.load()
 	IMG_bg = love.graphics.newImage("assets/bg.png")
 	IMG_shadow = love.graphics.newImage("assets/shadow.png")
 	IMG_at = love.graphics.newImage("assets/at.png")
+	IMG_movetile = love.graphics.newImage("assets/movetile.png")
 
 	IMG_knight_stand_south = love.graphics.newImage("assets/knight_stand_south.png")
 	IMG_knight_stand_north = love.graphics.newImage("assets/knight_stand_north.png")
@@ -79,6 +80,13 @@ function love.draw()
 			else
 				love.graphics.draw(IMG_grass, x*THW - y*THW, x*THH + y*THH)
 			end
+		end
+	end
+
+	if MOVABLES ~= nil then
+		for i=1, #MOVABLES do
+			local t = MOVABLES[i]
+			love.graphics.draw(IMG_movetile, t.x*THW - t.y*THW, t.x*THH + t.y*THH)
 		end
 	end
 
