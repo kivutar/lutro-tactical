@@ -34,7 +34,12 @@ function cursor:update(dt)
 	end
 	if JOY_A and self.cooldown == 0 then
 		self.cooldown = 10
-		MENU = NewMenu({})
+		for i = 1, #CHARS do
+			local char = CHARS[i]
+			if char.x == self.x and char.y == self.y then
+				MENU = NewMenu({char = char})
+			end
+		end
 	end
 
 	if self.x < 1 then self.x = 1 end

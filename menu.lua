@@ -35,6 +35,10 @@ function menu:update(dt)
 	if JOY_A and self.cooldown == 0 then
 		self.cooldown = 10
 	end
+
+	if JOY_B and self.cooldown == 0 then
+		MENU = nil
+	end
 end
 
 function menu:draw()

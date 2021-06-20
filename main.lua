@@ -26,8 +26,8 @@ function love.load()
 	FNT_letters = love.graphics.newImageFont("assets/letters.png", "ABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789.!?")
 	love.graphics.setFont(FNT_letters)
 
-	table.insert(CHARS, NewCharacter({x=2, y=2, direction=1, period=7}))
-	table.insert(CHARS, NewCharacter({x=2, y=1, direction=3, period=8}))
+	table.insert(CHARS, NewCharacter({x=3, y=3, direction=1, period=7}))
+	table.insert(CHARS, NewCharacter({x=3, y=2, direction=3, period=8}))
 
 	CURSOR = NewCursor({x=1, y=1})
 end
