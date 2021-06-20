@@ -8,16 +8,16 @@ function NewCharacter(n)
 	n.tweens = {}
 	n.animations = {
 		stand = {
-			[0] = NewAnimation(IMG_knight_stand_north,  20, 32, 1, 10),
-			[1] = NewAnimation(IMG_knight_stand_south,  20, 32, 1, 10),
-			[2] = NewAnimation(IMG_knight_stand_east,  20, 32, 1, 10),
-			[3] = NewAnimation(IMG_knight_stand_west,  20, 32, 1, 10),
+			[DIR_NORTH] = NewAnimation(IMG_knight_stand_north,  20, 32, 1, 10),
+			[DIR_SOUTH] = NewAnimation(IMG_knight_stand_south,  20, 32, 1, 10),
+			[DIR_EAST]  = NewAnimation(IMG_knight_stand_east,  20, 32, 1, 10),
+			[DIR_WEST]  = NewAnimation(IMG_knight_stand_west,  20, 32, 1, 10),
 		},
 		walk = {
-			[0] = NewAnimation(IMG_knight_walk_north,  20, 32, 1, 2),
-			[1] = NewAnimation(IMG_knight_walk_south,  20, 32, 1, 2),
-			[2] = NewAnimation(IMG_knight_walk_east,  20, 32, 1, 2),
-			[3] = NewAnimation(IMG_knight_walk_west,  20, 32, 1, 2),
+			[DIR_NORTH] = NewAnimation(IMG_knight_walk_north,  20, 32, 1, 2),
+			[DIR_SOUTH] = NewAnimation(IMG_knight_walk_south,  20, 32, 1, 2),
+			[DIR_EAST]  = NewAnimation(IMG_knight_walk_east,  20, 32, 1, 2),
+			[DIR_WEST]  = NewAnimation(IMG_knight_walk_west,  20, 32, 1, 2),
 		},
 	}
 	n.anim = n.animations[n.stance][n.direction]
@@ -33,10 +33,21 @@ function character:update(dt)
 	end
 end
 
+function GetNewDirection(x1, y1, x2, y2)
+	local dx = x2 - x1
+	local dy = y2 - y1
+
+	if (math.abs(dy) > math.abs(dx)) then
+		if dy > 0 then return DIR_SOUTH else return DIR_NORTH end
+	else
+		if dx > 0 then return DIR_WEST else return DIR_EAST end
+	end
+end
+
 function character:move(path)
 	table.remove(path, 1)
 	for i = 1, #path do
-		table.insert(self.tweens, Tween.new(0.5, self, {x=path[i].x, y=path[i].y}, 'linear'))
+		table.insert(self.tweens, Tween.new(0.3, self, {x=path[i].x, y=path[i].y}, 'linear'))
 	end
 end
 

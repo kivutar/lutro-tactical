@@ -24,3 +24,8 @@ TIME_RUNNING = true
 
 MENU = nil
 MOVABLES = nil
+
+DIR_NORTH = 1
+DIR_SOUTH = 2
+DIR_EAST  = 3
+DIR_WEST  = 4
