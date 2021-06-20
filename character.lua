@@ -26,5 +26,5 @@ function character:update(dt)
 end
 
 function character:draw()
-	self.anim:draw(self.x*THW - self.y*THW - 10 + THW, self.x*THH + self.y*THH + 10)
+	self.anim:draw(self.x*THW - self.y*THW - 10 + THW, self.x*THH + self.y*THH + 8)
 end

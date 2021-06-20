@@ -1,5 +1,26 @@
 require "anim"
+require "cursor"
 require "character"
+
+RETRO_DEVICE_ID_JOYPAD_B        = 1
+RETRO_DEVICE_ID_JOYPAD_Y        = 2
+RETRO_DEVICE_ID_JOYPAD_SELECT   = 3
+RETRO_DEVICE_ID_JOYPAD_START    = 4
+RETRO_DEVICE_ID_JOYPAD_UP       = 5
+RETRO_DEVICE_ID_JOYPAD_DOWN     = 6
+RETRO_DEVICE_ID_JOYPAD_LEFT     = 7
+RETRO_DEVICE_ID_JOYPAD_RIGHT    = 8
+RETRO_DEVICE_ID_JOYPAD_A        = 9
+RETRO_DEVICE_ID_JOYPAD_X        = 10
+RETRO_DEVICE_ID_JOYPAD_L        = 11
+RETRO_DEVICE_ID_JOYPAD_R        = 12
+RETRO_DEVICE_ID_JOYPAD_L2       = 13
+RETRO_DEVICE_ID_JOYPAD_R2       = 14
+RETRO_DEVICE_ID_JOYPAD_L3       = 15
+RETRO_DEVICE_ID_JOYPAD_R3       = 16
+
+THW=48/2
+THH=24/2
 
 CHARS = {}
 
@@ -18,6 +39,9 @@ function love.load()
 	IMG_grass = love.graphics.newImage("grass4.png")
 	IMG_water = love.graphics.newImage("water4.png")
 
+	IMG_cursor = love.graphics.newImage("cursor.png")
+	IMG_bg = love.graphics.newImage("bg.png")
+
 	IMG_knight_stand_south = love.graphics.newImage("knight_stand_south.png")
 	IMG_knight_stand_north = love.graphics.newImage("knight_stand_north.png")
 	IMG_knight_stand_west = love.graphics.newImage("knight_stand_west.png")
@@ -30,20 +54,24 @@ function love.load()
 
 	table.insert(CHARS, NewCharacter({x=2, y=2, direction=1}))
 	table.insert(CHARS, NewCharacter({x=2, y=1, direction=3}))
+
+	CURSOR = NewCursor({x=1, y=1})
 end
 
 function love.update(dt)
 	for i=1, #CHARS do
 		CHARS[i]:update(dt)
 	end
+
+	CURSOR:update(dt)
 end
 
-THW=48/2
-THH=24/2
-
 function love.draw()
+	love.graphics.draw(IMG_bg, 0, 0)
+
 	love.graphics.push()
 	love.graphics.translate(-THW+160, 0)
+
 	for y = 1, 8 do
 		for x = 1, 8 do
 			if MAP[y][x] == 0 then
@@ -53,8 +81,12 @@ function love.draw()
 			end
 		end
 	end
+
+	CURSOR:draw()
+
 	for i=1, #CHARS do
 		CHARS[i]:draw()
 	end
+
 	love.graphics.pop()
 end
