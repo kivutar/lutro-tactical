@@ -35,6 +35,8 @@ MAP = {
 	{0,0,0,0,0,0,0,0},
 }
 
+TIME_RUNNING = true
+
 function love.load()
 	IMG_grass = love.graphics.newImage("assets/grass4.png")
 	IMG_water = love.graphics.newImage("assets/water4.png")
@@ -42,6 +44,7 @@ function love.load()
 	IMG_cursor = love.graphics.newImage("assets/cursor.png")
 	IMG_bg = love.graphics.newImage("assets/bg.png")
 	IMG_shadow = love.graphics.newImage("assets/shadow.png")
+	IMG_at = love.graphics.newImage("assets/at.png")
 
 	IMG_knight_stand_south = love.graphics.newImage("assets/knight_stand_south.png")
 	IMG_knight_stand_north = love.graphics.newImage("assets/knight_stand_north.png")
@@ -53,18 +56,29 @@ function love.load()
 	IMG_knight_walk_west = love.graphics.newImage("assets/knight_walk_west.png")
 	IMG_knight_walk_east = love.graphics.newImage("assets/knight_walk_east.png")
 
-	table.insert(CHARS, NewCharacter({x=2, y=2, direction=1}))
-	table.insert(CHARS, NewCharacter({x=2, y=1, direction=3}))
+	table.insert(CHARS, NewCharacter({x=2, y=2, direction=1, period=7}))
+	table.insert(CHARS, NewCharacter({x=2, y=1, direction=3, period=8}))
 
 	CURSOR = NewCursor({x=1, y=1})
 end
 
 function love.update(dt)
+	if TIME_RUNNING then
+		for i=1, #CHARS do
+			CHARS[i].at = CHARS[i].at - 1
+			if CHARS[i].at == 0 then
+				TIME_RUNNING = false
+			end
+		end
+	end
+
 	for i=1, #CHARS do
 		CHARS[i]:update(dt)
 	end
 
-	CURSOR:update(dt)
+	if not TIME_RUNNING then
+		CURSOR:update(dt)
+	end
 end
 
 function love.draw()

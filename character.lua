@@ -3,6 +3,7 @@ character.__index = character
 
 function NewCharacter(n)
 	n.stance = "walk"
+	n.at = n.period
 	n.animations = {
 		stand = {
 			[0] = NewAnimation(IMG_knight_stand_north,  20, 32, 1, 10),
@@ -28,4 +29,7 @@ end
 function character:draw()
 	love.graphics.draw(IMG_shadow, self.x*THW - self.y*THW - 10 + THW, self.x*THH + self.y*THH + 30)
 	self.anim:draw(self.x*THW - self.y*THW - 10 + THW, self.x*THH + self.y*THH + 8)
+	if self.at == 0 then
+		love.graphics.draw(IMG_at, self.x*THW - self.y*THW - 10 + THW, self.x*THH + self.y*THH + 8)
+	end
 end
