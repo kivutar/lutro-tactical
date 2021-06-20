@@ -1,13 +1,45 @@
 local menu = {}
 menu.__index = menu
 
+function MapGet(x, y)
+	if y <= 0 or y > #MAP then return nil end
+	if x <= 0 or x > #MAP[1] then return nil end
+	if MAP[y][x] == 0 then return nil end
+	return {x, y}
+end
+
+function SelectMoveTile(char)
+	MOVING = true
+	MENU = nil
+	local around = {{x=-1,y=0},{x=1,y=0},{x=0,y=-1},{x=0,y=1}}
+	local selected = {}
+	for i = 1, #around do
+		local delta = around[i]
+		local adjacent = MapGet(char.x + delta.x, char.y + delta.y)
+		if adjacent ~= nil then table.insert(selected, adjacent) end
+	end
+	print(#selected)
+end
+
+function SelectAttackTile()
+	
+end
+
+function Wait()
+	
+end
+
+function SelectDirection()
+	
+end
+
 function NewMenu(n)
 	n.cooldown = 0
 	n.idx = 1
 	n.entries = {
-		{title="MOVE"},
-		{title="ATTACK"},
-		{title="WAIT"},
+		{title="MOVE", callback=function() SelectMoveTile(n.char) end},
+		{title="ATTACK", callback=SelectAttackTile},
+		{title="WAIT", callback=Wait},
 	}
 	return setmetatable(n, menu)
 end
@@ -34,6 +66,7 @@ function menu:update(dt)
 
 	if JOY_A and self.cooldown == 0 then
 		self.cooldown = 10
+		self.entries[self.idx].callback()
 	end
 
 	if JOY_B and self.cooldown == 0 then

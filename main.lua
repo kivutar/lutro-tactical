@@ -4,6 +4,17 @@ require "cursor"
 require "character"
 require "menu"
 
+MAP = {
+	{0,0,0,0,0,0,0,0},
+	{0,1,1,0,0,0,1,0},
+	{0,1,1,1,0,0,1,0},
+	{0,0,0,1,1,1,1,0},
+	{0,0,0,1,1,1,1,0},
+	{0,0,0,0,0,0,1,0},
+	{0,1,1,1,1,1,1,0},
+	{0,0,0,0,0,0,0,0},
+}
+
 function love.load()
 	IMG_grass = love.graphics.newImage("assets/grass4.png")
 	IMG_water = love.graphics.newImage("assets/water4.png")
