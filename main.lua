@@ -1,41 +1,8 @@
+require "global"
 require "anim"
 require "cursor"
 require "character"
-
-RETRO_DEVICE_ID_JOYPAD_B        = 1
-RETRO_DEVICE_ID_JOYPAD_Y        = 2
-RETRO_DEVICE_ID_JOYPAD_SELECT   = 3
-RETRO_DEVICE_ID_JOYPAD_START    = 4
-RETRO_DEVICE_ID_JOYPAD_UP       = 5
-RETRO_DEVICE_ID_JOYPAD_DOWN     = 6
-RETRO_DEVICE_ID_JOYPAD_LEFT     = 7
-RETRO_DEVICE_ID_JOYPAD_RIGHT    = 8
-RETRO_DEVICE_ID_JOYPAD_A        = 9
-RETRO_DEVICE_ID_JOYPAD_X        = 10
-RETRO_DEVICE_ID_JOYPAD_L        = 11
-RETRO_DEVICE_ID_JOYPAD_R        = 12
-RETRO_DEVICE_ID_JOYPAD_L2       = 13
-RETRO_DEVICE_ID_JOYPAD_R2       = 14
-RETRO_DEVICE_ID_JOYPAD_L3       = 15
-RETRO_DEVICE_ID_JOYPAD_R3       = 16
-
-THW=48/2
-THH=24/2
-
-CHARS = {}
-
-MAP = {
-	{0,0,0,0,0,0,0,0},
-	{0,1,1,0,0,0,1,0},
-	{0,1,1,0,0,0,1,0},
-	{0,0,0,0,0,0,1,0},
-	{0,0,0,0,0,0,1,0},
-	{0,0,0,0,0,0,1,0},
-	{0,1,1,1,1,1,1,0},
-	{0,0,0,0,0,0,0,0},
-}
-
-TIME_RUNNING = true
+require "menu"
 
 function love.load()
 	IMG_grass = love.graphics.newImage("assets/grass4.png")
@@ -55,6 +22,9 @@ function love.load()
 	IMG_knight_walk_north = love.graphics.newImage("assets/knight_walk_north.png")
 	IMG_knight_walk_west = love.graphics.newImage("assets/knight_walk_west.png")
 	IMG_knight_walk_east = love.graphics.newImage("assets/knight_walk_east.png")
+
+	FNT_letters = love.graphics.newImageFont("assets/letters.png", "ABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789.!?")
+	love.graphics.setFont(FNT_letters)
 
 	table.insert(CHARS, NewCharacter({x=2, y=2, direction=1, period=7}))
 	table.insert(CHARS, NewCharacter({x=2, y=1, direction=3, period=8}))
@@ -76,8 +46,12 @@ function love.update(dt)
 		CHARS[i]:update(dt)
 	end
 
-	if not TIME_RUNNING then
+	if not TIME_RUNNING and MENU == nil then
 		CURSOR:update(dt)
+	end
+
+	if MENU ~= nil then
+		MENU:update(dt)
 	end
 end
 
@@ -104,4 +78,8 @@ function love.draw()
 	end
 
 	love.graphics.pop()
+
+	if MENU ~= nil then
+		MENU:draw(dt)
+	end
 end
