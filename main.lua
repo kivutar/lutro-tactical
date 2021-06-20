@@ -3,6 +3,7 @@ require "anim"
 require "cursor"
 require "character"
 require "menu"
+require "moving"
 Tween = require "tween"
 
 MAP = {

@@ -33,17 +33,6 @@ function character:update(dt)
 	end
 end
 
-function GetNewDirection(x1, y1, x2, y2)
-	local dx = x2 - x1
-	local dy = y2 - y1
-
-	if (math.abs(dy) > math.abs(dx)) then
-		if dy > 0 then return DIR_WEST else return DIR_EAST end
-	else
-		if dx > 0 then return DIR_SOUTH else return DIR_NORTH end
-	end
-end
-
 function character:move(path)
 	local last = table.remove(path, 1)
 	for i = 1, #path do

@@ -3,7 +3,7 @@ cursor.__index = cursor
 
 function NewCursor(n)
 	n.img = IMG_cursor
-	n.cooldown = 0
+	n.cooldown = 30
 	return setmetatable(n, cursor)
 end
 
@@ -15,6 +15,7 @@ function cursor:update(dt)
 	local JOY_DOWN  = love.joystick.isDown(1, RETRO_DEVICE_ID_JOYPAD_DOWN)
 	local JOY_UP    = love.joystick.isDown(1, RETRO_DEVICE_ID_JOYPAD_UP)
 	local JOY_A    = love.joystick.isDown(1, RETRO_DEVICE_ID_JOYPAD_A)
+	local JOY_B    = love.joystick.isDown(1, RETRO_DEVICE_ID_JOYPAD_B)
 
 	if JOY_DOWN and self.cooldown == 0 then
 		self.y = self.y + 1
@@ -53,6 +54,11 @@ function cursor:update(dt)
 				end
 			end
 		end
+	end
+
+	if JOY_B and self.cooldown == 0 then
+		self.cooldown = 10
+		if MOVABLES ~= nil then MOVABLES = nil end
 	end
 
 	if self.x < 1 then self.x = 1 end
