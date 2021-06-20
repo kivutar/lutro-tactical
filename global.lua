@@ -23,5 +23,4 @@ CHARS = {}
 TIME_RUNNING = true
 
 MENU = nil
-MOVING = false
 MOVABLES = nil

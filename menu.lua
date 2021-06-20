@@ -3,7 +3,7 @@ menu.__index = menu
 
 local around = {{x=-1,y=0},{x=1,y=0},{x=0,y=-1},{x=0,y=1}}
 
-function Exists(list, item)
+function TileExists(list, item)
 	for i=1, #list do
 		if list[i].x == item.x and list[i].y == item.y then
 			return true
@@ -12,7 +12,7 @@ function Exists(list, item)
 	return false
 end
 
-function MapGet(x, y)
+function GetMovable(x, y)
 	if y <= 0 or y > #MAP then return nil end
 	if x <= 0 or x > #MAP[1] then return nil end
 	if MAP[y][x] == 0 then return nil end
@@ -30,8 +30,8 @@ function AddToList(pos, list, movement)
 	if movement <= 0 then return end
 	for i = 1, #around do
 		local delta = around[i]
-		local adjacent = MapGet(pos.x + delta.x, pos.y + delta.y)
-		if adjacent ~= nil and not Exists(list, adjacent) then
+		local adjacent = GetMovable(pos.x + delta.x, pos.y + delta.y)
+		if adjacent ~= nil and not TileExists(list, adjacent) then
 			table.insert(list, adjacent)
 			AddToList(adjacent, list, movement)
 		end
@@ -39,7 +39,6 @@ function AddToList(pos, list, movement)
 end
 
 function SelectMoveTile(char)
-	MOVING = true
 	MENU = nil
 	local movables = {}
 	local movement = char.movement

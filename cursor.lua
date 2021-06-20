@@ -32,12 +32,20 @@ function cursor:update(dt)
 		self.x = self.x - 1
 		self.cooldown = 10
 	end
+
 	if JOY_A and self.cooldown == 0 then
 		self.cooldown = 10
-		for i = 1, #CHARS do
-			local char = CHARS[i]
-			if char.x == self.x and char.y == self.y then
-				MENU = NewMenu({char = char})
+
+		if MOVABLES ~= nil then
+			if TileExists(MOVABLES, self) then
+				MOVABLES = nil
+			end
+		else
+			for i = 1, #CHARS do
+				local char = CHARS[i]
+				if char.x == self.x and char.y == self.y then
+					MENU = NewMenu({char = char})
+				end
 			end
 		end
 	end
