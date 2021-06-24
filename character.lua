@@ -58,7 +58,7 @@ end
 function character:draw()
 	love.graphics.draw(IMG_shadow, self.x*THW - self.y*THW - 10 + THW, self.x*THH + self.y*THH - THH*2 + 30)
 	self.anim:draw(self.x*THW - self.y*THW - 10 + THW, self.x*THH + self.y*THH - THH*2 + 8)
-	if self.at == 0 and MENU == nil then
+	if self.at == 0 and MENU == nil and DIRECTIONS == nil and MOVABLES == nil and ATTACKABLES == nil then
 		love.graphics.draw(IMG_at, self.x*THW - self.y*THW - 10 + THW, self.x*THH + self.y*THH - THH*2 + 8)
 	end
 end

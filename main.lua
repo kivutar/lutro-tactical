@@ -27,6 +27,8 @@ function love.load()
 	IMG_at = love.graphics.newImage("assets/at.png")
 	IMG_movetile = love.graphics.newImage("assets/movetile.png")
 	IMG_attacktile = love.graphics.newImage("assets/attacktile.png")
+	IMG_direction = love.graphics.newImage("assets/direction.png")
+	IMG_direction_active = love.graphics.newImage("assets/direction_active.png")
 
 	IMG_knight_stand_south = love.graphics.newImage("assets/knight_stand_south.png")
 	IMG_knight_stand_north = love.graphics.newImage("assets/knight_stand_north.png")
@@ -52,6 +54,8 @@ function love.update(dt)
 		for i=1, #CHARS do
 			CHARS[i].at = CHARS[i].at - 1
 			if CHARS[i].at == 0 then
+				CHARS[i].hasmoved = false
+				CHARS[i].hasattacked = false
 				TIME_RUNNING = false
 				CHAR_IDX = i
 			end
@@ -101,7 +105,18 @@ function love.draw()
 		end
 	end
 
-	CURSOR:draw()
+	if DIRECTIONS ~= nil then
+		local around = {{x=-0.5,y=0},{x=0.5,y=0},{x=0,y=-0.5},{x=0,y=0.5}}
+		for i = 1, #around do
+			local delta = around[i]
+			local t = {x = CHARS[CHAR_IDX].x + delta.x, y=CHARS[CHAR_IDX].y + delta.y}
+			love.graphics.draw(IMG_direction, t.x*THW - t.y*THW + THW - 4, t.x*THH + t.y*THH + THH - 4 - TH)
+		end
+	end
+
+	if DIRECTIONS == nil and MENU == nil then
+		CURSOR:draw()
+	end
 
 	for i=1, #CHARS do
 		CHARS[i]:draw()
@@ -110,6 +125,6 @@ function love.draw()
 	love.graphics.pop()
 
 	if MENU ~= nil then
-		MENU:draw(dt)
+		MENU:draw()
 	end
 end

@@ -40,6 +40,7 @@ function menu:update(dt)
 	if JOY_A and self.cooldown == 0 then
 		self.cooldown = 10
 		if not self:isActionDisabled(self.idx) then
+			MENU = nil
 			self.entries[self.idx].callback()
 		end
 	end

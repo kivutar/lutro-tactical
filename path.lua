@@ -13,7 +13,6 @@ end
 local around = {{x=-1,y=0},{x=1,y=0},{x=0,y=-1},{x=0,y=1}}
 
 function BuildPath(path, tile)
-	--print(tile.x, tile.y)
 	table.insert(path, 1, tile)
 	if tile.parent then
 		BuildPath(path, tile.parent)
@@ -78,7 +77,6 @@ function AddAttackableToList(pos, list, range)
 end
 
 function SelectMoveTile()
-	MENU = nil
 	local movables = {}
 	local movement = CHARS[CHAR_IDX].movement
 	local rootpos = {x = CHARS[CHAR_IDX].x, y = CHARS[CHAR_IDX].y}
@@ -87,7 +85,6 @@ function SelectMoveTile()
 end
 
 function SelectAttackTile()
-	MENU = nil
 	local attackables = {}
 	local rootpos = {x = CHARS[CHAR_IDX].x, y = CHARS[CHAR_IDX].y}
 	AddAttackableToList(rootpos, attackables, 2)
@@ -95,9 +92,9 @@ function SelectAttackTile()
 end
 
 function Wait()
-	
+	SelectDirection()
 end
 
 function SelectDirection()
-	
+	DIRECTIONS = {}
 end
