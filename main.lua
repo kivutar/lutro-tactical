@@ -59,6 +59,8 @@ function love.update(dt)
 				CHARS[i].hasattacked = false
 				TIME_RUNNING = false
 				CHAR_IDX = i
+				CURSOR:warp(CHARS[CHAR_IDX])
+				MENU = NewMenu({})
 			end
 		end
 	end
@@ -67,7 +69,7 @@ function love.update(dt)
 		CHARS[i]:update(dt)
 	end
 
-	if not TIME_RUNNING and MENU == nil and DIRECTIONS == nil then
+	if MENU == nil and DIRECTIONS == nil then
 		CURSOR:update(dt)
 	end
 
@@ -114,7 +116,7 @@ function love.draw()
 		DIRECTIONS:draw()
 	end
 
-	if DIRECTIONS == nil and MENU == nil then
+	if DIRECTIONS == nil then
 		CURSOR:draw()
 	end
 

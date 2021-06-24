@@ -21,12 +21,15 @@ function directions:update(dt)
 	if JOY_UP then DIRECTIONS_IDX = DIR_EAST end
 	if JOY_LEFT then DIRECTIONS_IDX = DIR_NORTH end
 	if JOY_RIGHT then DIRECTIONS_IDX = DIR_SOUTH end
+
+	CHARS[CHAR_IDX]:setDirection(DIRECTIONS_IDX)
+
 	if JOY_A and self.cooldown == 0 then
 		DIRECTIONS = nil
 		TIME_RUNNING = true
 		CHARS[CHAR_IDX].at = CHARS[CHAR_IDX].period
-		CHARS[CHAR_IDX]:setDirection(DIRECTIONS_IDX)
 	end
+
 	if JOY_B then DIRECTIONS = nil end
 end
 

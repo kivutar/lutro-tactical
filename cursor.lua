@@ -7,6 +7,11 @@ function NewCursor(n)
 	return setmetatable(n, cursor)
 end
 
+function cursor:warp(n)
+	self.x = n.x
+	self.y = n.y
+end
+
 function cursor:update(dt)
 	if self.cooldown > 0 then self.cooldown = self.cooldown - 1 end
 
