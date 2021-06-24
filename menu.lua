@@ -5,7 +5,7 @@ function NewMenu(n)
 	n.cooldown = 30
 	n.idx = 1
 	n.entries = {
-		{title="MOVE", callback=function() SelectMoveTile() end},
+		{title="MOVE", callback=SelectMoveTile},
 		{title="ATTACK", callback=SelectAttackTile},
 		{title="WAIT", callback=Wait},
 	}

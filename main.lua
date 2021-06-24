@@ -26,6 +26,7 @@ function love.load()
 	IMG_shadow = love.graphics.newImage("assets/shadow.png")
 	IMG_at = love.graphics.newImage("assets/at.png")
 	IMG_movetile = love.graphics.newImage("assets/movetile.png")
+	IMG_attacktile = love.graphics.newImage("assets/attacktile.png")
 
 	IMG_knight_stand_south = love.graphics.newImage("assets/knight_stand_south.png")
 	IMG_knight_stand_north = love.graphics.newImage("assets/knight_stand_north.png")
@@ -90,6 +91,13 @@ function love.draw()
 		for i=1, #MOVABLES do
 			local t = MOVABLES[i]
 			love.graphics.draw(IMG_movetile, t.x*THW - t.y*THW, t.x*THH + t.y*THH)
+		end
+	end
+
+	if ATTACKABLES ~= nil then
+		for i=1, #ATTACKABLES do
+			local t = ATTACKABLES[i]
+			love.graphics.draw(IMG_attacktile, t.x*THW - t.y*THW, t.x*THH + t.y*THH)
 		end
 	end
 

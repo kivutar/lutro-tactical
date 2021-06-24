@@ -69,6 +69,7 @@ function cursor:update(dt)
 	if JOY_B and self.cooldown == 0 then
 		self.cooldown = 10
 		if MOVABLES ~= nil then MOVABLES = nil end
+		if ATTACKABLES ~= nil then ATTACKABLES = nil end
 	end
 
 	if self.x < 1 then self.x = 1 end

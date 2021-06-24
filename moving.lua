@@ -42,16 +42,37 @@ function GetMovable(x, y)
 	return {x=x, y=y}
 end
 
-function AddToList(pos, list, moves)
-	moves = moves - 1
-	if moves <= 0 then return end
+function AddMovableToList(pos, list, range)
+	range = range - 1
+	if range <= 0 then return end
 	for i = 1, #around do
 		local delta = around[i]
 		local adjacent = GetMovable(pos.x + delta.x, pos.y + delta.y)
 		if adjacent ~= nil then
 			adjacent.parent = pos
 			table.insert(list, adjacent)
-			AddToList(adjacent, list, moves)
+			AddMovableToList(adjacent, list, range)
+		end
+	end
+end
+
+function GetAttackable(x, y)
+	if y <= 0 or y > #MAP then return nil end
+	if x <= 0 or x > #MAP then return nil end
+	if MAP[y][x] == 0 then return nil end
+	return {x=x, y=y}
+end
+
+function AddAttackableToList(pos, list, range)
+	range = range - 1
+	if range <= 0 then return end
+	for i = 1, #around do
+		local delta = around[i]
+		local adjacent = GetAttackable(pos.x + delta.x, pos.y + delta.y)
+		if adjacent ~= nil then
+			adjacent.parent = pos
+			table.insert(list, adjacent)
+			AddAttackableToList(adjacent, list, range)
 		end
 	end
 end
@@ -61,12 +82,16 @@ function SelectMoveTile()
 	local movables = {}
 	local movement = CHARS[CHAR_IDX].movement
 	local rootpos = {x = CHARS[CHAR_IDX].x, y = CHARS[CHAR_IDX].y}
-	AddToList(rootpos, movables, movement)
+	AddMovableToList(rootpos, movables, movement)
 	MOVABLES = movables
 end
 
 function SelectAttackTile()
-	
+	MENU = nil
+	local attackables = {}
+	local rootpos = {x = CHARS[CHAR_IDX].x, y = CHARS[CHAR_IDX].y}
+	AddAttackableToList(rootpos, attackables, 2)
+	ATTACKABLES = attackables
 end
 
 function Wait()

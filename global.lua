@@ -26,6 +26,7 @@ TIME_RUNNING = true
 
 MENU = nil
 MOVABLES = nil
+ATTACKABLES = nil
 
 DIR_NORTH = 1
 DIR_SOUTH = 2
