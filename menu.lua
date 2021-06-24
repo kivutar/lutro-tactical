@@ -1,7 +1,8 @@
 local menu = {}
 menu.__index = menu
 
-function NewMenu(n)
+function NewMenu()
+	local n = {}
 	n.cooldown = 30
 	n.idx = 1
 	n.entries = {

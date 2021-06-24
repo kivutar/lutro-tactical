@@ -35,9 +35,11 @@ end
 
 function directions:draw()
 	local around = {{x=-0.5,y=0},{x=0.5,y=0},{x=0,y=-0.5},{x=0,y=0.5}}
+
 	for i = 1, #around do
 		local delta = around[i]
-		local t = {x = CHARS[CHAR_IDX].x + delta.x, y=CHARS[CHAR_IDX].y + delta.y}
+		local char = CHARS[CHAR_IDX]
+		local t = {x = char.x + delta.x, y = char.y + delta.y}
 		local img = IMG_direction
 		if i == DIRECTIONS_IDX then
 			img = IMG_direction_active

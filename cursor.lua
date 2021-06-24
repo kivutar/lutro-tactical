@@ -52,7 +52,7 @@ function cursor:update(dt)
 					MENU = nil
 					CHARS[CHAR_IDX].hasmoved = true
 					if not CHARS[CHAR_IDX].hasattacked then
-						MENU = NewMenu({})
+						MENU = NewMenu()
 					end
 					if CHARS[CHAR_IDX].hasmoved and CHARS[CHAR_IDX].hasattacked then
 						Wait()
@@ -60,11 +60,30 @@ function cursor:update(dt)
 				end
 				CHARS[CHAR_IDX]:move(path, endcb)
 			end
+		elseif ATTACKABLES ~= nil then
+			for i = 1, #CHARS do
+				local target = CHARS[i]
+				local curr = CHARS[CHAR_IDX]
+				if target.x == self.x and target.y == self.y and not (target.x == curr.x and target.y == curr.y) then
+					local endcb = function ()
+						ATTACKABLES = nil
+						MENU = nil
+						CHARS[CHAR_IDX].hasattacked = true
+						if not CHARS[CHAR_IDX].hasmoved then
+							MENU = NewMenu()
+						end
+						if CHARS[CHAR_IDX].hasmoved and CHARS[CHAR_IDX].hasattacked then
+							Wait()
+						end
+					end
+					CHARS[CHAR_IDX]:attack(target, endcb)
+				end
+			end	
 		else
 			for i = 1, #CHARS do
 				local char = CHARS[i]
 				if char.x == self.x and char.y == self.y and char.at == 0 then
-					MENU = NewMenu({})
+					MENU = NewMenu()
 				end
 			end
 		end

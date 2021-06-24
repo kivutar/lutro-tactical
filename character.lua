@@ -59,6 +59,13 @@ function character:move(path, endcb)
 	end
 end
 
+function character:attack(target, endcb)
+	local nextdir = GetNewDirection(self.x, self.y, target.x, target.y)
+	self:setDirection(nextdir)
+	-- todo
+	endcb()
+end
+
 function character:draw()
 	love.graphics.draw(IMG_shadow, self.x*THW - self.y*THW - 10 + THW, self.x*THH + self.y*THH - THH*2 + 30)
 	self.anim:draw(self.x*THW - self.y*THW - 10 + THW, self.x*THH + self.y*THH - THH*2 + 8)
