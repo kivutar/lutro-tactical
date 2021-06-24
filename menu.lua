@@ -12,6 +12,11 @@ function NewMenu(n)
 	return setmetatable(n, menu)
 end
 
+function menu:isActionDisabled(i)
+	local e = self.entries[i]
+	return (e.title == "MOVE" and CHARS[CHAR_IDX].hasmoved) or (e.title == "ATTACK" and CHARS[CHAR_IDX].hasattacked)
+end
+
 function menu:update(dt)
 	if self.cooldown > 0 then self.cooldown = self.cooldown - 1 end
 
@@ -34,7 +39,9 @@ function menu:update(dt)
 
 	if JOY_A and self.cooldown == 0 then
 		self.cooldown = 10
-		self.entries[self.idx].callback()
+		if not self:isActionDisabled(self.idx) then
+			self.entries[self.idx].callback()
+		end
 	end
 
 	if JOY_B and self.cooldown == 0 then
@@ -50,7 +57,7 @@ function menu:draw()
 	for i=1, #self.entries do
 		local e = self.entries[i]
 		if self.idx == i then
-			if (e.title == "MOVE" and CHARS[CHAR_IDX].hasmoved) or (e.title == "ATTACK" and CHARS[CHAR_IDX].hasattacked) then
+			if self:isActionDisabled(i) then
 				love.graphics.setColor(128,128,128,255)
 			else
 				love.graphics.setColor(128,0,0,255)
