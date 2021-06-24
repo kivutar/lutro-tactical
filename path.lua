@@ -92,10 +92,6 @@ function SelectAttackTile()
 end
 
 function Wait()
-	SelectDirection()
-end
-
-function SelectDirection()
 	DIRECTIONS = NewDirections({})
 	DIRECTIONS_IDX = CHARS[CHAR_IDX].direction
 end

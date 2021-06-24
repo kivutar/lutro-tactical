@@ -67,7 +67,7 @@ function love.update(dt)
 		CHARS[i]:update(dt)
 	end
 
-	if not TIME_RUNNING and MENU == nil then
+	if not TIME_RUNNING and MENU == nil and DIRECTIONS == nil then
 		CURSOR:update(dt)
 	end
 

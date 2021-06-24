@@ -25,8 +25,7 @@ function directions:update(dt)
 		DIRECTIONS = nil
 		TIME_RUNNING = true
 		CHARS[CHAR_IDX].at = CHARS[CHAR_IDX].period
-		CHARS[CHAR_IDX].direction = DIRECTIONS_IDX
-		CHARS[CHAR_IDX].anim = CHARS[CHAR_IDX].animations[CHARS[CHAR_IDX].stance][CHARS[CHAR_IDX].direction]
+		CHARS[CHAR_IDX]:setDirection(DIRECTIONS_IDX)
 	end
 	if JOY_B then DIRECTIONS = nil end
 end

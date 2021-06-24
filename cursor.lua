@@ -50,8 +50,7 @@ function cursor:update(dt)
 						MENU = NewMenu({})
 					end
 					if CHARS[CHAR_IDX].hasmoved and CHARS[CHAR_IDX].hasattacked then
-						TIME_RUNNING = true
-						CHARS[CHAR_IDX].at = CHARS[CHAR_IDX].period
+						Wait()
 					end
 				end
 				CHARS[CHAR_IDX]:move(path, endcb)

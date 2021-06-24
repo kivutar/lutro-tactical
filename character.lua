@@ -37,14 +37,18 @@ function character:update(dt)
 	end
 end
 
+function character:setDirection(d)
+	self.direction = d
+	self.anim = self.animations[self.stance][self.direction]
+end
+
 function character:move(path, endcb)
 	local last = table.remove(path, 1)
 	for i = 1, #path do
 		local current = path[i]
 		local nextdir = GetNewDirection(last.x, last.y, current.x, current.y)
 		local mystartcb = function (n)
-			n.direction = nextdir
-			n.anim = n.animations[n.stance][n.direction]
+			n:setDirection(nextdir)
 		end
 		local myendcb = nil
 		if i == #path then
