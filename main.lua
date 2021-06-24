@@ -4,6 +4,7 @@ require "cursor"
 require "character"
 require "menu"
 require "path"
+require "directions"
 Tween = require "tween"
 
 MAP = {
@@ -73,6 +74,10 @@ function love.update(dt)
 	if MENU ~= nil then
 		MENU:update(dt)
 	end
+
+	if DIRECTIONS ~= nil then
+		DIRECTIONS:update(dt)
+	end
 end
 
 function love.draw()
@@ -106,12 +111,7 @@ function love.draw()
 	end
 
 	if DIRECTIONS ~= nil then
-		local around = {{x=-0.5,y=0},{x=0.5,y=0},{x=0,y=-0.5},{x=0,y=0.5}}
-		for i = 1, #around do
-			local delta = around[i]
-			local t = {x = CHARS[CHAR_IDX].x + delta.x, y=CHARS[CHAR_IDX].y + delta.y}
-			love.graphics.draw(IMG_direction, t.x*THW - t.y*THW + THW - 4, t.x*THH + t.y*THH + THH - 4 - TH)
-		end
+		DIRECTIONS:draw()
 	end
 
 	if DIRECTIONS == nil and MENU == nil then

@@ -96,5 +96,6 @@ function Wait()
 end
 
 function SelectDirection()
-	DIRECTIONS = {}
+	DIRECTIONS = NewDirections({})
+	DIRECTIONS_IDX = CHARS[CHAR_IDX].direction
 end
