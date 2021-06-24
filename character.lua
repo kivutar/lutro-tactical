@@ -4,8 +4,12 @@ character.__index = character
 function NewCharacter(n)
 	n.stance = "walk"
 	n.at = n.period
+	n.hasmoved = false
+	n.hasattacked = false
 	n.movement = 5
 	n.tweens = {}
+	n.maxhp = 3
+	n.hp = n.maxhp
 	n.animations = {
 		stand = {
 			[DIR_NORTH] = NewAnimation(IMG_knight_stand_north,  20, 32, 1, 10),
@@ -33,16 +37,20 @@ function character:update(dt)
 	end
 end
 
-function character:move(path)
+function character:move(path, endcb)
 	local last = table.remove(path, 1)
 	for i = 1, #path do
 		local current = path[i]
 		local nextdir = GetNewDirection(last.x, last.y, current.x, current.y)
-		local cb = function (n)
+		local mystartcb = function (n)
 			n.direction = nextdir
 			n.anim = n.animations[n.stance][n.direction]
 		end
-		table.insert(self.tweens, Tween.new(0.3, self, {x=current.x, y=current.y}, 'linear', cb))
+		local myendcb = nil
+		if i == #path then
+			myendcb = endcb
+		end
+		table.insert(self.tweens, Tween.new(0.3, self, {x=current.x, y=current.y}, 'linear', mystartcb, myendcb))
 		last = current
 	end
 end

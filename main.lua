@@ -79,7 +79,7 @@ function love.draw()
 	for y = 1, 8 do
 		for x = 1, 8 do
 			if MAP[y][x] == 0 then
-				love.graphics.draw(IMG_water, x*THW - y*THW, x*THH + y*THH + 8)
+				love.graphics.draw(IMG_water, x*THW - y*THW, x*THH + y*THH + 9)
 			else
 				love.graphics.draw(IMG_grass, x*THW - y*THW, x*THH + y*THH)
 			end

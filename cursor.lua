@@ -42,17 +42,25 @@ function cursor:update(dt)
 			if destination ~= nil then
 				local path = {}
 				BuildPath(path, destination)
-				CHARS[CHAR_IDX]:move(path)
-				MOVABLES = nil
-				MENU = nil
-				CHARS[CHAR_IDX].at = CHARS[CHAR_IDX].period
-				TIME_RUNNING = true
+				local endcb = function ()
+					MOVABLES = nil
+					MENU = nil
+					CHARS[CHAR_IDX].hasmoved = true
+					if not CHARS[CHAR_IDX].hasattacked then
+						MENU = NewMenu({})
+					end
+					if CHARS[CHAR_IDX].hasmoved and CHARS[CHAR_IDX].hasattacked then
+						TIME_RUNNING = true
+						CHARS[CHAR_IDX].at = CHARS[CHAR_IDX].period
+					end
+				end
+				CHARS[CHAR_IDX]:move(path, endcb)
 			end
 		else
 			for i = 1, #CHARS do
 				local char = CHARS[i]
 				if char.x == self.x and char.y == self.y and char.at == 0 then
-					MENU = NewMenu({char = char})
+					MENU = NewMenu({})
 				end
 			end
 		end

@@ -5,7 +5,7 @@ function NewMenu(n)
 	n.cooldown = 30
 	n.idx = 1
 	n.entries = {
-		{title="MOVE", callback=function() SelectMoveTile(n.char) end},
+		{title="MOVE", callback=function() SelectMoveTile() end},
 		{title="ATTACK", callback=SelectAttackTile},
 		{title="WAIT", callback=Wait},
 	}
@@ -48,11 +48,15 @@ function menu:draw()
 	love.graphics.rectangle("fill", 32, 48, 64, 64)
 
 	for i=1, #self.entries do
+		local e = self.entries[i]
 		if self.idx == i then
-			love.graphics.setColor(128,0,0,255)
+			if (e.title == "MOVE" and CHARS[CHAR_IDX].hasmoved) or (e.title == "ATTACK" and CHARS[CHAR_IDX].hasattacked) then
+				love.graphics.setColor(128,128,128,255)
+			else
+				love.graphics.setColor(128,0,0,255)
+			end
 			love.graphics.rectangle("fill", 32, 48+ (i-1)*16, 64, 16)
 		end
-		local e = self.entries[i]
 		love.graphics.setColor(255,255,255,255)
 		love.graphics.print(e.title, 32+5, 48+5 + (i-1)*16)
 	end

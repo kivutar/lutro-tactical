@@ -323,8 +323,6 @@ function Tween:set(clock)
 
   if self.clock <= 0 then
 
-
-
     self.clock = 0
     copyTables(self.subject, self.initial)
 
@@ -333,12 +331,16 @@ function Tween:set(clock)
     self.clock = self.duration
     copyTables(self.subject, self.target)
 
+    if self.endcb ~= nil then
+      self.endcb(self.subject)
+    end
+
   else
 
     performEasingOnSubject(self.subject, self.target, self.initial, self.clock, self.duration, self.easing)
 
-    if self.callback ~= nil then
-      self.callback(self.subject)
+    if self.startcb ~= nil then
+      self.startcb(self.subject)
     end
   end
 
@@ -357,7 +359,7 @@ end
 
 -- Public interface
 
-function tween.new(duration, subject, target, easing, callback)
+function tween.new(duration, subject, target, easing, startcb, endcb)
   easing = getEasingFunction(easing)
   checkNewParams(duration, subject, target, easing)
   return setmetatable({
@@ -366,7 +368,8 @@ function tween.new(duration, subject, target, easing, callback)
     target    = target,
     easing    = easing,
     clock     = 0,
-    callback  = callback
+    startcb   = startcb,
+    endcb     = endcb
   }, Tween_mt)
 end
 

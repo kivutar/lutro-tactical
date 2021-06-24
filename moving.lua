@@ -56,11 +56,11 @@ function AddToList(pos, list, moves)
 	end
 end
 
-function SelectMoveTile(char)
+function SelectMoveTile()
 	MENU = nil
 	local movables = {}
-	local movement = char.movement
-	local rootpos = {x = char.x, y = char.y}
+	local movement = CHARS[CHAR_IDX].movement
+	local rootpos = {x = CHARS[CHAR_IDX].x, y = CHARS[CHAR_IDX].y}
 	AddToList(rootpos, movables, movement)
 	MOVABLES = movables
 end
