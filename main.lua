@@ -6,6 +6,7 @@ require "menu"
 require "path"
 require "directions"
 Tween = require "tween"
+Cron = require 'cron'
 
 MAP = {
 	{0,0,0,0,0,0,0,0},
@@ -40,6 +41,11 @@ function love.load()
 	IMG_knight_walk_north = love.graphics.newImage("assets/knight_walk_north.png")
 	IMG_knight_walk_west = love.graphics.newImage("assets/knight_walk_west.png")
 	IMG_knight_walk_east = love.graphics.newImage("assets/knight_walk_east.png")
+
+	IMG_knight_attack_south = love.graphics.newImage("assets/knight_attack_south.png")
+	IMG_knight_attack_north = love.graphics.newImage("assets/knight_attack_north.png")
+	IMG_knight_attack_west = love.graphics.newImage("assets/knight_attack_west.png")
+	IMG_knight_attack_east = love.graphics.newImage("assets/knight_attack_east.png")
 
 	FNT_letters = love.graphics.newImageFont("assets/letters.png", "ABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789.!?")
 	love.graphics.setFont(FNT_letters)

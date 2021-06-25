@@ -69,6 +69,7 @@ function cursor:update(dt)
 						ATTACKABLES = nil
 						MENU = nil
 						CHARS[CHAR_IDX].hasattacked = true
+						CHARS[CHAR_IDX]:setStance("walk")
 						if not CHARS[CHAR_IDX].hasmoved then
 							MENU = NewMenu()
 						end

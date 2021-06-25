@@ -8,6 +8,7 @@ function NewCharacter(n)
 	n.hasattacked = false
 	n.movement = 5
 	n.tweens = {}
+	n.crons = {}
 	n.maxhp = 3
 	n.hp = n.maxhp
 	n.animations = {
@@ -23,6 +24,12 @@ function NewCharacter(n)
 			[DIR_EAST]  = NewAnimation(IMG_knight_walk_east,  20, 32, 1, 2),
 			[DIR_WEST]  = NewAnimation(IMG_knight_walk_west,  20, 32, 1, 2),
 		},
+		attack = {
+			[DIR_NORTH] = NewAnimation(IMG_knight_attack_north,  20, 32, 1, 4),
+			[DIR_SOUTH] = NewAnimation(IMG_knight_attack_south,  20, 32, 1, 4),
+			[DIR_EAST]  = NewAnimation(IMG_knight_attack_east,  20, 32, 1, 4),
+			[DIR_WEST]  = NewAnimation(IMG_knight_attack_west,  20, 32, 1, 4),
+		},
 	}
 	n.anim = n.animations[n.stance][n.direction]
 	return setmetatable(n, character)
@@ -35,6 +42,16 @@ function character:update(dt)
 			table.remove(self.tweens, 1)
 		end
 	end
+	if #self.crons > 0 then
+		if self.crons[1]:update(dt) then
+			table.remove(self.crons, 1)
+		end
+	end
+end
+
+function character:setStance(s)
+	self.stance = s
+	self.anim = self.animations[self.stance][self.direction]
 end
 
 function character:setDirection(d)
@@ -62,8 +79,8 @@ end
 function character:attack(target, endcb)
 	local nextdir = GetNewDirection(self.x, self.y, target.x, target.y)
 	self:setDirection(nextdir)
-	-- todo
-	endcb()
+	self:setStance("attack")
+	table.insert(self.crons, Cron.after(1, endcb))
 end
 
 function character:draw()
