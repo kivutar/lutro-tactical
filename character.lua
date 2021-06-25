@@ -25,10 +25,10 @@ function NewCharacter(n)
 			[DIR_WEST]  = NewAnimation(IMG_knight_walk_west,  20, 32, 1, 2),
 		},
 		attack = {
-			[DIR_NORTH] = NewAnimation(IMG_knight_attack_north,  20, 32, 1, 4),
-			[DIR_SOUTH] = NewAnimation(IMG_knight_attack_south,  20, 32, 1, 4),
-			[DIR_EAST]  = NewAnimation(IMG_knight_attack_east,  20, 32, 1, 4),
-			[DIR_WEST]  = NewAnimation(IMG_knight_attack_west,  20, 32, 1, 4),
+			[DIR_NORTH] = NewAnimation(IMG_knight_attack_north,  20, 32, 1, 8),
+			[DIR_SOUTH] = NewAnimation(IMG_knight_attack_south,  20, 32, 1, 8),
+			[DIR_EAST]  = NewAnimation(IMG_knight_attack_east,  20, 32, 1, 8),
+			[DIR_WEST]  = NewAnimation(IMG_knight_attack_west,  20, 32, 1, 8),
 		},
 	}
 	n.anim = n.animations[n.stance][n.direction]
