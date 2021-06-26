@@ -52,6 +52,11 @@ function love.load()
 	IMG_knight_hit_west = love.graphics.newImage("assets/knight_hit_west.png")
 	IMG_knight_hit_east = love.graphics.newImage("assets/knight_hit_east.png")
 
+	IMG_knight_dead_south = love.graphics.newImage("assets/knight_dead_south.png")
+	IMG_knight_dead_north = love.graphics.newImage("assets/knight_dead_north.png")
+	IMG_knight_dead_west = love.graphics.newImage("assets/knight_dead_west.png")
+	IMG_knight_dead_east = love.graphics.newImage("assets/knight_dead_east.png")
+
 	FNT_letters = love.graphics.newImageFont("assets/letters.png", "ABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789.!?")
 	love.graphics.setFont(FNT_letters)
 
@@ -64,14 +69,16 @@ end
 function love.update(dt)
 	if TIME_RUNNING then
 		for i=1, #CHARS do
-			CHARS[i].at = CHARS[i].at - 1
-			if CHARS[i].at == 0 then
-				CHARS[i].hasmoved = false
-				CHARS[i].hasattacked = false
-				TIME_RUNNING = false
-				CHAR_IDX = i
-				CURSOR:warp(CHARS[CHAR_IDX])
-				MENU = NewMenu({})
+			if CHARS[i].hp ~= 0 then
+				CHARS[i].at = CHARS[i].at - 1
+				if CHARS[i].at == 0 then
+					CHARS[i].hasmoved = false
+					CHARS[i].hasattacked = false
+					TIME_RUNNING = false
+					CHAR_IDX = i
+					CURSOR:warp(CHARS[CHAR_IDX])
+					MENU = NewMenu({})
+				end
 			end
 		end
 	end

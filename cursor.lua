@@ -64,7 +64,9 @@ function cursor:update(dt)
 			for i = 1, #CHARS do
 				local target = CHARS[i]
 				local curr = CHARS[CHAR_IDX]
-				if target.x == self.x and target.y == self.y and not (target.x == curr.x and target.y == curr.y) then
+				if target.x == self.x and target.y == self.y
+					and not (target.x == curr.x and target.y == curr.y)
+					and target.hp > 0 then
 					local endcb = function ()
 						ATTACKABLES = nil
 						MENU = nil
@@ -79,7 +81,7 @@ function cursor:update(dt)
 					end
 					CHARS[CHAR_IDX]:attack(target, endcb)
 				end
-			end	
+			end
 		else
 			for i = 1, #CHARS do
 				local char = CHARS[i]
