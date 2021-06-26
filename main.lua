@@ -47,6 +47,11 @@ function love.load()
 	IMG_knight_attack_west = love.graphics.newImage("assets/knight_attack_west.png")
 	IMG_knight_attack_east = love.graphics.newImage("assets/knight_attack_east.png")
 
+	IMG_knight_hit_south = love.graphics.newImage("assets/knight_hit_south.png")
+	IMG_knight_hit_north = love.graphics.newImage("assets/knight_hit_north.png")
+	IMG_knight_hit_west = love.graphics.newImage("assets/knight_hit_west.png")
+	IMG_knight_hit_east = love.graphics.newImage("assets/knight_hit_east.png")
+
 	FNT_letters = love.graphics.newImageFont("assets/letters.png", "ABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789.!?")
 	love.graphics.setFont(FNT_letters)
 

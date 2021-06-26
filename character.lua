@@ -30,6 +30,12 @@ function NewCharacter(n)
 			[DIR_EAST]  = NewAnimation(IMG_knight_attack_east,  20, 32, 1, 8),
 			[DIR_WEST]  = NewAnimation(IMG_knight_attack_west,  20, 32, 1, 8),
 		},
+		hit = {
+			[DIR_NORTH] = NewAnimation(IMG_knight_hit_north,  20, 32, 1, 8),
+			[DIR_SOUTH] = NewAnimation(IMG_knight_hit_south,  20, 32, 1, 8),
+			[DIR_EAST]  = NewAnimation(IMG_knight_hit_east,  20, 32, 1, 8),
+			[DIR_WEST]  = NewAnimation(IMG_knight_hit_west,  20, 32, 1, 8),
+		},
 	}
 	n.anim = n.animations[n.stance][n.direction]
 	return setmetatable(n, character)
@@ -81,6 +87,12 @@ function character:attack(target, endcb)
 	self:setDirection(nextdir)
 	self:setStance("attack")
 	table.insert(self.crons, Cron.after(1, endcb))
+	table.insert(self.crons, Cron.after(0.01, function ()
+		target:setStance("hit")
+	end))
+	table.insert(self.crons, Cron.after(0.5, function ()
+		target:setStance("walk")
+	end))
 end
 
 function character:draw()
