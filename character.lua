@@ -19,10 +19,10 @@ function NewCharacter(n)
 			[DIR_WEST]  = NewAnimation(IMG_knight_stand_west,  20, 32, 1, 10),
 		},
 		walk = {
-			[DIR_NORTH] = NewAnimation(IMG_knight_walk_north,  20, 32, 1, 2),
-			[DIR_SOUTH] = NewAnimation(IMG_knight_walk_south,  20, 32, 1, 2),
-			[DIR_EAST]  = NewAnimation(IMG_knight_walk_east,  20, 32, 1, 2),
-			[DIR_WEST]  = NewAnimation(IMG_knight_walk_west,  20, 32, 1, 2),
+			[DIR_NORTH] = NewAnimation(IMG_knight_walk_north,  20, 32, 1, 8),
+			[DIR_SOUTH] = NewAnimation(IMG_knight_walk_south,  20, 32, 1, 8),
+			[DIR_EAST]  = NewAnimation(IMG_knight_walk_east,  20, 32, 1, 8),
+			[DIR_WEST]  = NewAnimation(IMG_knight_walk_west,  20, 32, 1, 8),
 		},
 		attack = {
 			[DIR_NORTH] = NewAnimation(IMG_knight_attack_north,  20, 32, 1, 8),
