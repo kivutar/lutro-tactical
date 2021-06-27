@@ -32,7 +32,7 @@ return {
 	isPressed = function (pad, btn)
 		return state[pad][btn] > 0
 	end,
-	justPressed = function (pad, btn)
+	once = function (pad, btn)
 		local val = state[pad][btn] == 1
 		if val then state[pad][btn] = state[pad][btn] + 1 end
 		return val

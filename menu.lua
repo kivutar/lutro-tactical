@@ -28,16 +28,14 @@ function menu:update(dt)
 	if self.idx < 1 then self.idx = 1 end
 	if self.idx >= #self.entries then self.idx = #self.entries end
 
-	if Input.justPressed(1, BTN_A) then
-		--Input.reset(1, BTN_A)
+	if Input.once(1, BTN_A) then
 		if not self:isActionDisabled(self.idx) then
 			MENU = nil
 			self.entries[self.idx].callback()
 		end
 	end
 
-	if Input.justPressed(1, BTN_B) then
-		--Input.reset(1, BTN_B)
+	if Input.once(1, BTN_B) then
 		MENU = nil
 	end
 end

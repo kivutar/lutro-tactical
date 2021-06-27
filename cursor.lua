@@ -25,8 +25,7 @@ function cursor:update(dt)
 		self.x = self.x - 1
 	end
 
-	if Input.justPressed(1, BTN_A) then
-		--Input.reset(1, BTN_A)
+	if Input.once(1, BTN_A) then
 
 		if MOVABLES ~= nil then
 			local destination = TileIn(MOVABLES, self)
@@ -78,8 +77,7 @@ function cursor:update(dt)
 		end
 	end
 
-	if Input.justPressed(1, BTN_B) then
-		--Input.reset(1, BTN_B)
+	if Input.once(1, BTN_B) then
 		if MOVABLES ~= nil then MOVABLES = nil end
 		if ATTACKABLES ~= nil then ATTACKABLES = nil end
 	end

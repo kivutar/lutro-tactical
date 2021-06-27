@@ -7,22 +7,20 @@ function NewDirections(n)
 end
 
 function directions:update(dt)
-	if Input.justPressed(1, BTN_DOWN) then DIRECTIONS_IDX = DIR_WEST end
-	if Input.justPressed(1, BTN_UP) then DIRECTIONS_IDX = DIR_EAST end
-	if Input.justPressed(1, BTN_LEFT) then DIRECTIONS_IDX = DIR_NORTH end
-	if Input.justPressed(1, BTN_RIGHT) then DIRECTIONS_IDX = DIR_SOUTH end
+	if Input.once(1, BTN_DOWN) then DIRECTIONS_IDX = DIR_WEST end
+	if Input.once(1, BTN_UP) then DIRECTIONS_IDX = DIR_EAST end
+	if Input.once(1, BTN_LEFT) then DIRECTIONS_IDX = DIR_NORTH end
+	if Input.once(1, BTN_RIGHT) then DIRECTIONS_IDX = DIR_SOUTH end
 
 	CHAR:setDirection(DIRECTIONS_IDX)
 
-	if Input.justPressed(1, BTN_A) then
-		Input.reset(1, BTN_A)
+	if Input.once(1, BTN_A) then
 		DIRECTIONS = nil
 		TIME_RUNNING = true
 		CHAR.at = CHAR.period
 	end
 
-	if Input.justPressed(1, BTN_B) then
-		Input.reset(1, BTN_B)
+	if Input.once(1, BTN_B) then
 		DIRECTIONS = nil
 	end
 end
