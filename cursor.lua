@@ -50,36 +50,36 @@ function cursor:update(dt)
 				local endcb = function ()
 					MOVABLES = nil
 					MENU = nil
-					CHARS[CHAR_IDX].hasmoved = true
-					if not CHARS[CHAR_IDX].hasattacked then
+					CHAR.hasmoved = true
+					if not CHAR.hasattacked then
 						MENU = NewMenu()
 					end
-					if CHARS[CHAR_IDX].hasmoved and CHARS[CHAR_IDX].hasattacked then
+					if CHAR.hasmoved and CHAR.hasattacked then
 						Wait()
 					end
 				end
-				CHARS[CHAR_IDX]:move(path, endcb)
+				CHAR:move(path, endcb)
 			end
 		elseif ATTACKABLES ~= nil then
 			for i = 1, #CHARS do
 				local target = CHARS[i]
-				local curr = CHARS[CHAR_IDX]
+				local curr = CHAR
 				if target.x == self.x and target.y == self.y
 					and not (target.x == curr.x and target.y == curr.y)
 					and target.hp > 0 then
 					local endcb = function ()
 						ATTACKABLES = nil
 						MENU = nil
-						CHARS[CHAR_IDX].hasattacked = true
-						CHARS[CHAR_IDX]:setStance("walk")
-						if not CHARS[CHAR_IDX].hasmoved then
+						CHAR.hasattacked = true
+						CHAR:setStance("walk")
+						if not CHAR.hasmoved then
 							MENU = NewMenu()
 						end
-						if CHARS[CHAR_IDX].hasmoved and CHARS[CHAR_IDX].hasattacked then
+						if CHAR.hasmoved and CHAR.hasattacked then
 							Wait()
 						end
 					end
-					CHARS[CHAR_IDX]:attack(target, endcb)
+					CHAR:attack(target, endcb)
 				end
 			end
 		else

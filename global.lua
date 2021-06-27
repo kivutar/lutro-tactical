@@ -26,8 +26,8 @@ THW = TW / 2
 THH = TH / 2
 
 CHARS = {}
-
 CHAR_IDX = 0
+CHAr = {}
 
 TIME_RUNNING = true
 

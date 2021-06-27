@@ -15,7 +15,7 @@ end
 
 function menu:isActionDisabled(i)
 	local e = self.entries[i]
-	return (e.title == "MOVE" and CHARS[CHAR_IDX].hasmoved) or (e.title == "ATTACK" and CHARS[CHAR_IDX].hasattacked)
+	return (e.title == "MOVE" and CHAR.hasmoved) or (e.title == "ATTACK" and CHAR.hasattacked)
 end
 
 function menu:update(dt)

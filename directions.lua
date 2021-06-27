@@ -3,7 +3,7 @@ directions.__index = directions
 
 function NewDirections(n)
 	n.cooldown = 30
-	n.idx = CHARS[CHAR_IDX].direction
+	n.idx = CHAR.direction
 	return setmetatable(n, directions)
 end
 
@@ -22,12 +22,12 @@ function directions:update(dt)
 	if JOY_LEFT then DIRECTIONS_IDX = DIR_NORTH end
 	if JOY_RIGHT then DIRECTIONS_IDX = DIR_SOUTH end
 
-	CHARS[CHAR_IDX]:setDirection(DIRECTIONS_IDX)
+	CHAR:setDirection(DIRECTIONS_IDX)
 
 	if JOY_A and self.cooldown == 0 then
 		DIRECTIONS = nil
 		TIME_RUNNING = true
-		CHARS[CHAR_IDX].at = CHARS[CHAR_IDX].period
+		CHAR.at = CHAR.period
 	end
 
 	if JOY_B then DIRECTIONS = nil end
@@ -38,7 +38,7 @@ function directions:draw()
 
 	for i = 1, #around do
 		local delta = around[i]
-		local char = CHARS[CHAR_IDX]
+		local char = CHAR
 		local t = {x = char.x + delta.x, y = char.y + delta.y}
 		local img = IMG_direction
 		if i == DIRECTIONS_IDX then

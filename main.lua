@@ -76,8 +76,9 @@ function love.update(dt)
 					CHARS[i].hasattacked = false
 					TIME_RUNNING = false
 					CHAR_IDX = i
-					CURSOR:warp(CHARS[CHAR_IDX])
-					MENU = NewMenu({})
+					CHAR = CHARS[CHAR_IDX]
+					CURSOR:warp(CHAR)
+					MENU = NewMenu()
 				end
 			end
 		end
@@ -98,6 +99,10 @@ function love.update(dt)
 	if DIRECTIONS ~= nil then
 		DIRECTIONS:update(dt)
 	end
+
+	table.sort(CHARS, function (a, b)
+		return a.x+a.y < b.x+b.y
+	end)
 end
 
 function love.draw()
@@ -137,6 +142,7 @@ function love.draw()
 	if DIRECTIONS == nil then
 		CURSOR:draw()
 	end
+
 
 	for i=1, #CHARS do
 		CHARS[i]:draw()

@@ -78,20 +78,20 @@ end
 
 function SelectMoveTile()
 	local movables = {}
-	local movement = CHARS[CHAR_IDX].movement
-	local rootpos = {x = CHARS[CHAR_IDX].x, y = CHARS[CHAR_IDX].y}
+	local movement = CHAR.movement
+	local rootpos = {x = CHAR.x, y = CHAR.y}
 	AddMovableToList(rootpos, movables, movement)
 	MOVABLES = movables
 end
 
 function SelectAttackTile()
 	local attackables = {}
-	local rootpos = {x = CHARS[CHAR_IDX].x, y = CHARS[CHAR_IDX].y}
+	local rootpos = {x = CHAR.x, y = CHAR.y}
 	AddAttackableToList(rootpos, attackables, 2)
 	ATTACKABLES = attackables
 end
 
 function Wait()
 	DIRECTIONS = NewDirections({})
-	DIRECTIONS_IDX = CHARS[CHAR_IDX].direction
+	DIRECTIONS_IDX = CHAR.direction
 end
