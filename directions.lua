@@ -2,35 +2,29 @@ local directions = {}
 directions.__index = directions
 
 function NewDirections(n)
-	n.cooldown = 30
 	n.idx = CHAR.direction
 	return setmetatable(n, directions)
 end
 
 function directions:update(dt)
-	if self.cooldown > 0 then self.cooldown = self.cooldown - 1 end
-
-	local JOY_DOWN  = love.joystick.isDown(1, RETRO_DEVICE_ID_JOYPAD_DOWN)
-	local JOY_UP    = love.joystick.isDown(1, RETRO_DEVICE_ID_JOYPAD_UP)
-	local JOY_LEFT  = love.joystick.isDown(1, RETRO_DEVICE_ID_JOYPAD_LEFT)
-	local JOY_RIGHT = love.joystick.isDown(1, RETRO_DEVICE_ID_JOYPAD_RIGHT)
-	local JOY_A    = love.joystick.isDown(1, RETRO_DEVICE_ID_JOYPAD_A)
-	local JOY_B    = love.joystick.isDown(1, RETRO_DEVICE_ID_JOYPAD_B)
-
-	if JOY_DOWN then DIRECTIONS_IDX = DIR_WEST end
-	if JOY_UP then DIRECTIONS_IDX = DIR_EAST end
-	if JOY_LEFT then DIRECTIONS_IDX = DIR_NORTH end
-	if JOY_RIGHT then DIRECTIONS_IDX = DIR_SOUTH end
+	if Input.justPressed(1, BTN_DOWN) then DIRECTIONS_IDX = DIR_WEST end
+	if Input.justPressed(1, BTN_UP) then DIRECTIONS_IDX = DIR_EAST end
+	if Input.justPressed(1, BTN_LEFT) then DIRECTIONS_IDX = DIR_NORTH end
+	if Input.justPressed(1, BTN_RIGHT) then DIRECTIONS_IDX = DIR_SOUTH end
 
 	CHAR:setDirection(DIRECTIONS_IDX)
 
-	if JOY_A and self.cooldown == 0 then
+	if Input.justPressed(1, BTN_A) then
+		Input.reset(1, BTN_A)
 		DIRECTIONS = nil
 		TIME_RUNNING = true
 		CHAR.at = CHAR.period
 	end
 
-	if JOY_B then DIRECTIONS = nil end
+	if Input.justPressed(1, BTN_B) then
+		Input.reset(1, BTN_B)
+		DIRECTIONS = nil
+	end
 end
 
 function directions:draw()

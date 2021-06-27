@@ -3,7 +3,6 @@ cursor.__index = cursor
 
 function NewCursor(n)
 	n.img = IMG_cursor
-	n.cooldown = 30
 	return setmetatable(n, cursor)
 end
 
@@ -13,34 +12,21 @@ function cursor:warp(n)
 end
 
 function cursor:update(dt)
-	if self.cooldown > 0 then self.cooldown = self.cooldown - 1 end
-
-	local JOY_LEFT  = love.joystick.isDown(1, RETRO_DEVICE_ID_JOYPAD_LEFT)
-	local JOY_RIGHT = love.joystick.isDown(1, RETRO_DEVICE_ID_JOYPAD_RIGHT)
-	local JOY_DOWN  = love.joystick.isDown(1, RETRO_DEVICE_ID_JOYPAD_DOWN)
-	local JOY_UP    = love.joystick.isDown(1, RETRO_DEVICE_ID_JOYPAD_UP)
-	local JOY_A     = love.joystick.isDown(1, RETRO_DEVICE_ID_JOYPAD_A)
-	local JOY_B     = love.joystick.isDown(1, RETRO_DEVICE_ID_JOYPAD_B)
-
-	if JOY_DOWN and self.cooldown == 0 then
+	if Input.withCooldown(1, BTN_DOWN) then
 		self.y = self.y + 1
-		self.cooldown = 10
 	end
-	if JOY_UP and self.cooldown == 0 then
+	if Input.withCooldown(1, BTN_UP) then
 		self.y = self.y - 1
-		self.cooldown = 10
 	end
-	if JOY_RIGHT and self.cooldown == 0 then
+	if Input.withCooldown(1, BTN_RIGHT) then
 		self.x = self.x + 1
-		self.cooldown = 10
 	end
-	if JOY_LEFT and self.cooldown == 0 then
+	if Input.withCooldown(1, BTN_LEFT) then
 		self.x = self.x - 1
-		self.cooldown = 10
 	end
 
-	if JOY_A and self.cooldown == 0 then
-		self.cooldown = 10
+	if Input.justPressed(1, BTN_A) then
+		--Input.reset(1, BTN_A)
 
 		if MOVABLES ~= nil then
 			local destination = TileIn(MOVABLES, self)
@@ -92,8 +78,8 @@ function cursor:update(dt)
 		end
 	end
 
-	if JOY_B and self.cooldown == 0 then
-		self.cooldown = 10
+	if Input.justPressed(1, BTN_B) then
+		--Input.reset(1, BTN_B)
 		if MOVABLES ~= nil then MOVABLES = nil end
 		if ATTACKABLES ~= nil then ATTACKABLES = nil end
 	end

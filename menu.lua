@@ -3,7 +3,6 @@ menu.__index = menu
 
 function NewMenu()
 	local n = {}
-	n.cooldown = 30
 	n.idx = 1
 	n.entries = {
 		{title="MOVE", callback=SelectMoveTile},
@@ -19,35 +18,26 @@ function menu:isActionDisabled(i)
 end
 
 function menu:update(dt)
-	if self.cooldown > 0 then self.cooldown = self.cooldown - 1 end
-
-	local JOY_DOWN  = love.joystick.isDown(1, RETRO_DEVICE_ID_JOYPAD_DOWN)
-	local JOY_UP    = love.joystick.isDown(1, RETRO_DEVICE_ID_JOYPAD_UP)
-	local JOY_A    = love.joystick.isDown(1, RETRO_DEVICE_ID_JOYPAD_A)
-	local JOY_B    = love.joystick.isDown(1, RETRO_DEVICE_ID_JOYPAD_B)
-
-	if JOY_DOWN and self.cooldown == 0 then
+	if Input.withCooldown(1, BTN_DOWN) then
 		self.idx = self.idx + 1
-		self.cooldown = 10
 	end
-	if JOY_UP and self.cooldown == 0 then
+	if Input.withCooldown(1, BTN_UP) then
 		self.idx = self.idx - 1
-		self.cooldown = 10
 	end
 
 	if self.idx < 1 then self.idx = 1 end
 	if self.idx >= #self.entries then self.idx = #self.entries end
 
-	if JOY_A and self.cooldown == 0 then
-		self.cooldown = 10
+	if Input.justPressed(1, BTN_A) then
+		--Input.reset(1, BTN_A)
 		if not self:isActionDisabled(self.idx) then
 			MENU = nil
 			self.entries[self.idx].callback()
 		end
 	end
 
-	if JOY_B and self.cooldown == 0 then
-		self.cooldown = 10
+	if Input.justPressed(1, BTN_B) then
+		--Input.reset(1, BTN_B)
 		MENU = nil
 	end
 end

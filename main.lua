@@ -6,7 +6,8 @@ require "menu"
 require "path"
 require "directions"
 Tween = require "tween"
-Cron = require 'cron'
+Cron = require "cron"
+Input = require "input"
 
 MAP = {
 	{0,0,0,0,0,0,0,0},
@@ -67,6 +68,8 @@ function love.load()
 end
 
 function love.update(dt)
+	Input.update()
+
 	if TIME_RUNNING then
 		for i=1, #CHARS do
 			if CHARS[i].hp ~= 0 then
@@ -75,8 +78,7 @@ function love.update(dt)
 					CHARS[i].hasmoved = false
 					CHARS[i].hasattacked = false
 					TIME_RUNNING = false
-					CHAR_IDX = i
-					CHAR = CHARS[CHAR_IDX]
+					CHAR = CHARS[i]
 					CURSOR:warp(CHAR)
 					MENU = NewMenu()
 				end
