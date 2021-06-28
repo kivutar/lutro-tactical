@@ -20,9 +20,11 @@ end
 function menu:update(dt)
 	if Input.withCooldown(1, BTN_DOWN) then
 		self.idx = self.idx + 1
+		SFX_select:play()
 	end
 	if Input.withCooldown(1, BTN_UP) then
 		self.idx = self.idx - 1
+		SFX_select:play()
 	end
 
 	if self.idx < 1 then self.idx = 1 end
@@ -30,19 +32,19 @@ function menu:update(dt)
 
 	if Input.once(1, BTN_A) then
 		if not self:isActionDisabled(self.idx) then
+			SFX_ok:play()
 			MENU = nil
 			self.entries[self.idx].callback()
 		end
 	end
 
 	if Input.once(1, BTN_B) then
+		SFX_cancel:play()
 		MENU = nil
 	end
 end
 
 function menu:draw()
-	--love.graphics.setColor(0,0,0,255)
-	--love.graphics.rectangle("fill", 32, 48, 64, 64)
 	love.graphics.setColor(255,255,255,255)
 	love.graphics.draw(IMG_menu, 32-4, 48-4)
 

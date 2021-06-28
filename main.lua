@@ -1,5 +1,6 @@
 require "global"
 require "anim"
+require "slam"
 require "cursor"
 require "character"
 require "menu"
@@ -58,6 +59,10 @@ function love.load()
 	IMG_knight_dead_north = love.graphics.newImage("assets/knight_dead_north.png")
 	IMG_knight_dead_west = love.graphics.newImage("assets/knight_dead_west.png")
 	IMG_knight_dead_east = love.graphics.newImage("assets/knight_dead_east.png")
+
+	SFX_ok = NewSource("assets/ok.wav", "static")
+	SFX_select = NewSource("assets/select.wav", "static")
+	SFX_cancel = NewSource("assets/cancel.wav", "static")
 
 	FNT_letters = love.graphics.newImageFont("assets/letters.png", "ABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789.!?")
 	love.graphics.setFont(FNT_letters)

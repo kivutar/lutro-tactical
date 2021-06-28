@@ -14,15 +14,19 @@ end
 function cursor:update(dt)
 	if Input.withCooldown(1, BTN_DOWN) then
 		self.y = self.y + 1
+		SFX_select:play()
 	end
 	if Input.withCooldown(1, BTN_UP) then
 		self.y = self.y - 1
+		SFX_select:play()
 	end
 	if Input.withCooldown(1, BTN_RIGHT) then
 		self.x = self.x + 1
+		SFX_select:play()
 	end
 	if Input.withCooldown(1, BTN_LEFT) then
 		self.x = self.x - 1
+		SFX_select:play()
 	end
 
 	if Input.once(1, BTN_A) then
@@ -30,6 +34,7 @@ function cursor:update(dt)
 		if MOVABLES ~= nil then
 			local destination = TileIn(MOVABLES, self)
 			if destination ~= nil then
+				SFX_ok:play()
 				local path = {}
 				BuildPath(path, destination)
 				local endcb = function ()
@@ -52,6 +57,7 @@ function cursor:update(dt)
 				if target.x == self.x and target.y == self.y
 					and not (target.x == curr.x and target.y == curr.y)
 					and target.hp > 0 then
+					SFX_ok:play()
 					local endcb = function ()
 						ATTACKABLES = nil
 						MENU = nil
@@ -78,6 +84,7 @@ function cursor:update(dt)
 	end
 
 	if Input.once(1, BTN_B) then
+		SFX_cancel:play()
 		if MOVABLES ~= nil then MOVABLES = nil end
 		if ATTACKABLES ~= nil then ATTACKABLES = nil end
 	end
