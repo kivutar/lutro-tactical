@@ -41,8 +41,10 @@ function menu:update(dt)
 end
 
 function menu:draw()
-	love.graphics.setColor(0,0,0,255)
-	love.graphics.rectangle("fill", 32, 48, 64, 64)
+	--love.graphics.setColor(0,0,0,255)
+	--love.graphics.rectangle("fill", 32, 48, 64, 64)
+	love.graphics.setColor(255,255,255,255)
+	love.graphics.draw(IMG_menu, 32-4, 48-4)
 
 	for i=1, #self.entries do
 		local e = self.entries[i]

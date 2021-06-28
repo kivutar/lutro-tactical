@@ -86,7 +86,7 @@ function character:move(path, endcb)
 		if i == #path then
 			myendcb = endcb
 		end
-		table.insert(self.tweens, Tween.new(0.3, self, {x=current.x, y=current.y}, 'linear', mystartcb, myendcb))
+		table.insert(self.tweens, Tween.new(0.25, self, {x=current.x, y=current.y}, 'linear', mystartcb, myendcb))
 		last = current
 	end
 end

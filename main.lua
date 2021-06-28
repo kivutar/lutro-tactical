@@ -25,6 +25,7 @@ function love.load()
 	IMG_water = love.graphics.newImage("assets/water4.png")
 
 	IMG_cursor = love.graphics.newImage("assets/cursor.png")
+	IMG_menu = love.graphics.newImage("assets/menu.png")
 	IMG_bg = love.graphics.newImage("assets/bg.png")
 	IMG_shadow = love.graphics.newImage("assets/shadow.png")
 	IMG_at = love.graphics.newImage("assets/at.png")
