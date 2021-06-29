@@ -64,6 +64,9 @@ function love.load()
 	SFX_select = NewSource("assets/select.wav", "static")
 	SFX_cancel = NewSource("assets/cancel.wav", "static")
 
+	ANIM_movetile = NewAnimation(IMG_movetile, 48, 24, 1, 4)
+	ANIM_attacktile = NewAnimation(IMG_attacktile, 48, 24, 1, 4)
+
 	FNT_letters = love.graphics.newImageFont("assets/letters.png", "ABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789.!?")
 	love.graphics.setFont(FNT_letters)
 
@@ -91,6 +94,9 @@ function love.update(dt)
 			end
 		end
 	end
+
+	ANIM_movetile:update(dt)
+	ANIM_attacktile:update(dt)
 
 	for i=1, #CHARS do
 		CHARS[i]:update(dt)
@@ -132,14 +138,14 @@ function love.draw()
 	if MOVABLES ~= nil then
 		for i=1, #MOVABLES do
 			local t = MOVABLES[i]
-			love.graphics.draw(IMG_movetile, t.x*THW - t.y*THW, t.x*THH + t.y*THH)
+			ANIM_movetile:draw(t.x*THW - t.y*THW, t.x*THH + t.y*THH)
 		end
 	end
 
 	if ATTACKABLES ~= nil then
 		for i=1, #ATTACKABLES do
 			local t = ATTACKABLES[i]
-			love.graphics.draw(IMG_attacktile, t.x*THW - t.y*THW, t.x*THH + t.y*THH)
+			ANIM_attacktile:draw(t.x*THW - t.y*THW, t.x*THH + t.y*THH)
 		end
 	end
 
