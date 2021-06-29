@@ -128,7 +128,7 @@ function love.draw()
 	for y = 1, 8 do
 		for x = 1, 8 do
 			if MAP[y][x] == 0 then
-				love.graphics.draw(IMG_water, x*THW - y*THW, x*THH + y*THH + 9)
+				love.graphics.draw(IMG_water, x*THW - y*THW, x*THH + y*THH + 16)
 			else
 				love.graphics.draw(IMG_grass, x*THW - y*THW, x*THH + y*THH)
 			end
@@ -153,10 +153,9 @@ function love.draw()
 		DIRECTIONS:draw()
 	end
 
-	if DIRECTIONS == nil then
+	if DIRECTIONS == nil and not TIME_RUNNING then
 		CURSOR:draw()
 	end
-
 
 	for i=1, #CHARS do
 		CHARS[i]:draw()
