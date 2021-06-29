@@ -58,9 +58,9 @@ function cursor:update(dt)
 					and not (target.x == curr.x and target.y == curr.y)
 					and target.hp > 0 then
 					SFX_ok:play()
+					ATTACKABLES = nil
+					MENU = nil
 					local endcb = function ()
-						ATTACKABLES = nil
-						MENU = nil
 						CHAR.hasattacked = true
 						CHAR:setStance("walk")
 						if not CHAR.hasmoved then
