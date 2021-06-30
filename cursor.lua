@@ -91,7 +91,7 @@ function cursor:update(dt)
 
 	if self.x < 1 then self.x = 1 end
 	if self.y < 1 then self.y = 1 end
-	if self.x >= #MAP then self.x = #MAP end
+	if self.x >= #MAP[1] then self.x = #MAP[1] end
 	if self.y >= #MAP then self.y = #MAP end
 end
 

@@ -18,6 +18,8 @@ MAP = {
 	{0,0,0,1,1,1,1,0},
 	{0,0,0,0,0,0,1,0},
 	{0,1,1,1,1,1,1,0},
+	{0,1,1,1,1,1,1,0},
+	{0,1,1,1,1,1,1,0},
 	{0,0,0,0,0,0,0,0},
 }
 
@@ -125,8 +127,8 @@ function love.draw()
 	love.graphics.push()
 	love.graphics.translate(-THW+160, 0)
 
-	for y = 1, 8 do
-		for x = 1, 8 do
+	for y = 1, #MAP do
+		for x = 1, #MAP[1] do
 			if MAP[y][x] == 0 then
 				love.graphics.draw(IMG_water, x*THW - y*THW, x*THH + y*THH + 16)
 			else
