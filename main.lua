@@ -12,11 +12,11 @@ Input = require "input"
 
 MAP = {
 	{0,0,0,0,0,0,0,0},
-	{0,1,1,0,0,0,1,0},
-	{0,1,1,1,0,0,1,0},
+	{0,1,1,1,1,1,1,0},
+	{0,1,1,1,1,0,1,0},
+	{0,1,0,1,1,0,1,0},
 	{0,0,0,1,1,1,1,0},
-	{0,0,0,1,1,1,1,0},
-	{0,0,0,0,0,0,1,0},
+	{0,0,1,1,0,0,1,0},
 	{0,1,1,1,1,1,1,0},
 	{0,1,1,1,1,1,1,0},
 	{0,1,1,1,1,1,1,0},
@@ -72,8 +72,15 @@ function love.load()
 	FNT_letters = love.graphics.newImageFont("assets/letters.png", "ABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789.!?")
 	love.graphics.setFont(FNT_letters)
 
-	table.insert(CHARS, NewCharacter({x=3, y=3, direction=DIR_SOUTH, period=7}))
-	table.insert(CHARS, NewCharacter({x=3, y=2, direction=DIR_SOUTH, period=8}))
+	table.insert(CHARS, NewCharacter({x=3, y=2, direction=DIR_WEST, period=71, team=1}))
+	table.insert(CHARS, NewCharacter({x=4, y=2, direction=DIR_WEST, period=80, team=1}))
+	table.insert(CHARS, NewCharacter({x=5, y=2, direction=DIR_WEST, period=81, team=1}))
+	table.insert(CHARS, NewCharacter({x=6, y=2, direction=DIR_WEST, period=79, team=1}))
+
+	table.insert(CHARS, NewCharacter({x=3, y=9, direction=DIR_EAST, period=68, team=2}))
+	table.insert(CHARS, NewCharacter({x=4, y=9, direction=DIR_EAST, period=69, team=2}))
+	table.insert(CHARS, NewCharacter({x=5, y=9, direction=DIR_EAST, period=72, team=2}))
+	table.insert(CHARS, NewCharacter({x=6, y=9, direction=DIR_EAST, period=82, team=2}))
 
 	CURSOR = NewCursor({x=1, y=1})
 end
