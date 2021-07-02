@@ -33,7 +33,7 @@ function cursor:update(dt)
 
 		if MOVABLES ~= nil then
 			local destination = TileIn(MOVABLES, self)
-			if destination ~= nil then
+			if destination ~= nil and CharInTile(destination) == nil then
 				SFX_ok:play()
 				local path = {}
 				BuildPath(path, destination)

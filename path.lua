@@ -34,7 +34,7 @@ function GetMovable(x, y)
 	if MAP[y][x] == 0 then return nil end
 	for i = 1, #CHARS do
 		local c = CHARS[i]
-		if c.x == x and c.y == y then
+		if c.x == x and c.y == y and c.team ~= CHAR.team then
 			return nil
 		end
 	end
@@ -94,4 +94,14 @@ end
 function Wait()
 	DIRECTIONS = NewDirections({})
 	DIRECTIONS_IDX = CHAR.direction
+end
+
+function CharInTile(t)
+	for i = 1, #CHARS do
+		local c = CHARS[i]
+		if c.x == t.x and c.y == t.y then
+			return c
+		end
+	end
+	return nil
 end
