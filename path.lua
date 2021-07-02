@@ -34,7 +34,7 @@ function GetMovable(x, y)
 	if MAP[y][x] == 0 then return nil end
 	for i = 1, #CHARS do
 		local c = CHARS[i]
-		if c.x == x and c.y == y and c.team ~= CHAR.team then
+		if c.x == x and c.y == y and c.team ~= CHAR.team and c.hp > 0 then
 			return nil
 		end
 	end
