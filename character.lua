@@ -3,7 +3,6 @@ character.__index = character
 
 function NewCharacter(n)
 	n.stance = "walk"
-	n.at = n.period
 	n.hasmoved = false
 	n.hasattacked = false
 	n.movement = 5
