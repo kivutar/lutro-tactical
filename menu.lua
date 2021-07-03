@@ -61,9 +61,9 @@ function menu:draw()
 			else
 				love.graphics.setColor(128,0,0,255)
 			end
-			love.graphics.rectangle("fill", 32, 48+ (i-1)*16, 64, 16)
+			love.graphics.rectangle("fill", 32, 48+ (i-1)*16, 64, 15)
 		end
 		love.graphics.setColor(255,255,255,255)
-		love.graphics.print(e.title, 32+5, 48+5 + (i-1)*16)
+		love.graphics.print(e.title, 32+4, 48+4 + (i-1)*16)
 	end
 end

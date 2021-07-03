@@ -30,7 +30,11 @@ function directions:update(dt)
 		SFX_ok:play()
 		DIRECTIONS = nil
 		TIME_RUNNING = true
-		CHAR.at = CHAR.period
+		if not CHAR.hasattacked or not CHAR.hasmoved then
+			CHAR.at = CHAR.period / 2
+		else
+			CHAR.at = CHAR.period
+		end
 	end
 
 	if Input.once(1, BTN_B) then

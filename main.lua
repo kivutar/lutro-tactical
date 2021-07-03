@@ -148,7 +148,7 @@ function love.draw()
 	love.graphics.draw(IMG_bg, 0, 0)
 
 	love.graphics.push()
-	love.graphics.translate(-THW+160, 0)
+	love.graphics.translate(-THW+160, 16)
 
 	for y = 1, #MAP do
 		for x = 1, #MAP[1] do
