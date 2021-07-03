@@ -50,6 +50,6 @@ function directions:draw()
 		if i == DIRECTIONS_IDX then
 			img = IMG_direction_active
 		end
-		love.graphics.draw(img, t.x*THW - t.y*THW + THW - 4, t.x*THH + t.y*THH + THH - 4 - TH)
+		love.graphics.draw(img, t.x*THW - t.y*THW + THW - 4, t.x*THH + t.y*THH + THH - 8 - TH)
 	end
 end

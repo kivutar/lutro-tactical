@@ -2,6 +2,7 @@ local cursor = {}
 cursor.__index = cursor
 
 function NewCursor(n)
+	n.t = 0
 	return setmetatable(n, cursor)
 end
 
@@ -11,6 +12,8 @@ function cursor:warp(n)
 end
 
 function cursor:update(dt)
+	self.t = self.t + 0.05
+
 	if Input.withCooldown(1, BTN_DOWN) then
 		self.y = self.y + 1
 		SFX_select:play()
@@ -98,6 +101,7 @@ function cursor:update(dt)
 			for i = 1, #CHARS do
 				local char = CHARS[i]
 				if char.x == self.x and char.y == self.y and char.at == 0 then
+					SFX_ok:play()
 					MENU = NewMenu()
 				end
 			end
@@ -121,5 +125,5 @@ function cursor:draw()
 end
 
 function cursor:draw2()
-	love.graphics.draw(IMG_cursorarrow, self.x*THW - self.y*THW + 16, self.x*THH + self.y*THH - 32)
+	love.graphics.draw(IMG_cursorarrow, self.x*THW - self.y*THW + 16, self.x*THH + self.y*THH - 32 - math.cos(self.t)*2)
 end
