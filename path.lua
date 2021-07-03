@@ -44,7 +44,9 @@ end
 function AddMovableToList(pos, list, range)
 	if range <= 0 then return end
 	pos.visited = true
-	table.insert(list, pos)
+	if CharInTile(pos) == nil then
+		table.insert(list, pos)
+	end
 	for i = 1, #around do
 		local delta = around[i]
 		local adj = GetMovable(pos.x + delta.x, pos.y + delta.y)
