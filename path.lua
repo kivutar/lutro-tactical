@@ -48,7 +48,9 @@ function AddMovableToList(pos, list, range)
 		local delta = around[i]
 		local adjacent = GetMovable(pos.x + delta.x, pos.y + delta.y)
 		if adjacent ~= nil then
-			adjacent.parent = pos
+			if not adjacent.parent then
+				adjacent.parent = pos
+			end
 			table.insert(list, adjacent)
 			AddMovableToList(adjacent, list, range)
 		end
@@ -69,7 +71,6 @@ function AddAttackableToList(pos, list, range)
 		local delta = around[i]
 		local adjacent = GetAttackable(pos.x + delta.x, pos.y + delta.y)
 		if adjacent ~= nil then
-			adjacent.parent = pos
 			table.insert(list, adjacent)
 			AddAttackableToList(adjacent, list, range)
 		end
@@ -82,7 +83,6 @@ function AddMagicableToList(pos, list)
 		for range = 1, 8 do
 			local t = GetAttackable(pos.x + delta.x*range, pos.y + delta.y*range)
 			if t ~= nil then
-				t.parent = pos
 				table.insert(list, t)
 			end
 		end
