@@ -68,20 +68,31 @@ function cursor:update(dt)
 				if target.x == self.x and target.y == self.y
 					and not (target.x == curr.x and target.y == curr.y)
 					and target.hp > 0 then
+
 					SFX_ok:play()
-					ATTACKABLES = nil
-					MENU = nil
-					local endcb = function ()
-						CHAR.hasattacked = true
-						CHAR:setStance("walk")
-						if not CHAR.hasmoved then
-							MENU = NewMenu()
+
+					local okcb = function ()
+						ATTACKABLES = nil
+						MENU = nil
+						local endcb = function ()
+							CHAR.hasattacked = true
+							CHAR:setStance("walk")
+							if not CHAR.hasmoved then
+								MENU = NewMenu()
+							end
+							if CHAR.hasmoved and CHAR.hasattacked then
+								Wait()
+							end
 						end
-						if CHAR.hasmoved and CHAR.hasattacked then
-							Wait()
-						end
+						CHAR:attack(target, endcb)
 					end
-					CHAR:attack(target, endcb)
+
+					local cancelcb = function ()
+						MENU = nil
+					end
+
+					MENU = NewConfirmation({okcb=okcb, cancelcb=cancelcb})
+
 				end
 			end
 		else
