@@ -34,21 +34,32 @@ function cursor:update(dt)
 		if MOVABLES ~= nil then
 			local destination = TileIn(MOVABLES, self)
 			if destination ~= nil and CharInTile(destination) == nil then
+
 				SFX_ok:play()
-				local path = {}
-				BuildPath(path, destination)
-				local endcb = function ()
-					MOVABLES = nil
-					MENU = nil
-					CHAR.hasmoved = true
-					if not CHAR.hasattacked then
-						MENU = NewMenu()
+
+				local okcb = function ()
+					local path = {}
+					BuildPath(path, destination)
+					local endcb = function ()
+						MOVABLES = nil
+						MENU = nil
+						CHAR.hasmoved = true
+						if not CHAR.hasattacked then
+							MENU = NewMenu()
+						end
+						if CHAR.hasmoved and CHAR.hasattacked then
+							Wait()
+						end
 					end
-					if CHAR.hasmoved and CHAR.hasattacked then
-						Wait()
-					end
+					CHAR:move(path, endcb)
 				end
-				CHAR:move(path, endcb)
+
+				local cancelcb = function ()
+					MENU = nil
+				end
+
+				MENU = NewConfirmation({okcb=okcb, cancelcb=cancelcb})
+
 			end
 		elseif ATTACKABLES ~= nil then
 			for i = 1, #CHARS do

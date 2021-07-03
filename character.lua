@@ -8,7 +8,11 @@ function NewCharacter(n)
 	n.movement = 5
 	n.tweens = {}
 	n.crons = {}
-	n.maxhp = 2
+	if n.job == "knight" then
+		n.maxhp = 4
+	elseif n.job == "wizzard" then
+		n.maxhp = 2
+	end
 	n.hp = n.maxhp
 	n.animations = {
 		knight = {

@@ -4,6 +4,7 @@ require "slam"
 require "cursor"
 require "character"
 require "menu"
+require "confirmation"
 require "path"
 require "directions"
 Tween = require "tween"
@@ -29,6 +30,7 @@ function love.load()
 
 	IMG_cursor = love.graphics.newImage("assets/cursor.png")
 	IMG_menu = love.graphics.newImage("assets/menu.png")
+	IMG_yesno = love.graphics.newImage("assets/yesno.png")
 	IMG_bg = love.graphics.newImage("assets/bg.png")
 	IMG_shadow = love.graphics.newImage("assets/shadow.png")
 	IMG_at = love.graphics.newImage("assets/at.png")
@@ -36,11 +38,6 @@ function love.load()
 	IMG_attacktile = love.graphics.newImage("assets/attacktile.png")
 	IMG_direction = love.graphics.newImage("assets/direction.png")
 	IMG_direction_active = love.graphics.newImage("assets/direction_active.png")
-
-	-- IMG_knight_stand_south = love.graphics.newImage("assets/knight_stand_south.png")
-	-- IMG_knight_stand_north = love.graphics.newImage("assets/knight_stand_north.png")
-	-- IMG_knight_stand_west = love.graphics.newImage("assets/knight_stand_west.png")
-	-- IMG_knight_stand_east = love.graphics.newImage("assets/knight_stand_east.png")
 
 	IMG_knight_walk_south = love.graphics.newImage("assets/knight_walk_south.png")
 	IMG_knight_walk_north = love.graphics.newImage("assets/knight_walk_north.png")
