@@ -143,6 +143,6 @@ function character:draw()
 		self.anim:draw(self.x*THW - self.y*THW - 10 + THW, self.x*THH + self.y*THH - THH*2 + 6)
 	end
 	if self.at == 0 and MENU == nil and DIRECTIONS == nil and MOVABLES == nil and ATTACKABLES == nil then
-		love.graphics.draw(IMG_at, self.x*THW - self.y*THW - 10 + THW, self.x*THH + self.y*THH - THH*2 + 6)
+		love.graphics.draw(IMG_at, self.x*THW - self.y*THW - 14 + THW, self.x*THH + self.y*THH - THH*2 + 6)
 	end
 end

@@ -27,6 +27,7 @@ function love.load()
 	IMG_water = love.graphics.newImage("assets/water4.png")
 
 	IMG_cursor = love.graphics.newImage("assets/cursor.png")
+	IMG_cursorarrow = love.graphics.newImage("assets/cursorarrow.png")
 	IMG_menu = love.graphics.newImage("assets/menu.png")
 	IMG_yesno = love.graphics.newImage("assets/yesno.png")
 	IMG_bg = love.graphics.newImage("assets/bg.png")
@@ -183,6 +184,10 @@ function love.draw()
 
 	for i=1, #CHARS do
 		CHARS[i]:draw()
+	end
+
+	if DIRECTIONS == nil and not TIME_RUNNING then
+		CURSOR:draw2()
 	end
 
 	love.graphics.pop()

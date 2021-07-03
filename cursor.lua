@@ -2,7 +2,6 @@ local cursor = {}
 cursor.__index = cursor
 
 function NewCursor(n)
-	n.img = IMG_cursor
 	return setmetatable(n, cursor)
 end
 
@@ -118,5 +117,9 @@ function cursor:update(dt)
 end
 
 function cursor:draw()
-	love.graphics.draw(self.img, self.x*THW - self.y*THW, self.x*THH + self.y*THH)
+	love.graphics.draw(IMG_cursor, self.x*THW - self.y*THW, self.x*THH + self.y*THH)
+end
+
+function cursor:draw2()
+	love.graphics.draw(IMG_cursorarrow, self.x*THW - self.y*THW + 16, self.x*THH + self.y*THH - 32)
 end
