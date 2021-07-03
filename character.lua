@@ -11,38 +11,60 @@ function NewCharacter(n)
 	n.maxhp = 2
 	n.hp = n.maxhp
 	n.animations = {
-		stand = {
-			[DIR_NORTH] = NewAnimation(IMG_knight_stand_north,  20, 32, 1, 10),
-			[DIR_SOUTH] = NewAnimation(IMG_knight_stand_south,  20, 32, 1, 10),
-			[DIR_EAST]  = NewAnimation(IMG_knight_stand_east,  20, 32, 1, 10),
-			[DIR_WEST]  = NewAnimation(IMG_knight_stand_west,  20, 32, 1, 10),
+		knight = {
+			walk = {
+				[DIR_NORTH] = NewAnimation(IMG_knight_walk_north,  20, 32, 1, 8),
+				[DIR_SOUTH] = NewAnimation(IMG_knight_walk_south,  20, 32, 1, 8),
+				[DIR_EAST]  = NewAnimation(IMG_knight_walk_east,  20, 32, 1, 8),
+				[DIR_WEST]  = NewAnimation(IMG_knight_walk_west,  20, 32, 1, 8),
+			},
+			attack = {
+				[DIR_NORTH] = NewAnimation(IMG_knight_attack_north,  20, 32, 1, 8),
+				[DIR_SOUTH] = NewAnimation(IMG_knight_attack_south,  20, 32, 1, 8),
+				[DIR_EAST]  = NewAnimation(IMG_knight_attack_east,  20, 32, 1, 8),
+				[DIR_WEST]  = NewAnimation(IMG_knight_attack_west,  20, 32, 1, 8),
+			},
+			hit = {
+				[DIR_NORTH] = NewAnimation(IMG_knight_hit_north,  20, 32, 1, 8),
+				[DIR_SOUTH] = NewAnimation(IMG_knight_hit_south,  20, 32, 1, 8),
+				[DIR_EAST]  = NewAnimation(IMG_knight_hit_east,  20, 32, 1, 8),
+				[DIR_WEST]  = NewAnimation(IMG_knight_hit_west,  20, 32, 1, 8),
+			},
+			dead = {
+				[DIR_NORTH] = NewAnimation(IMG_knight_dead_north,  20, 32, 1, 8),
+				[DIR_SOUTH] = NewAnimation(IMG_knight_dead_south,  20, 32, 1, 8),
+				[DIR_EAST]  = NewAnimation(IMG_knight_dead_east,  20, 32, 1, 8),
+				[DIR_WEST]  = NewAnimation(IMG_knight_dead_west,  20, 32, 1, 8),
+			},
 		},
-		walk = {
-			[DIR_NORTH] = NewAnimation(IMG_knight_walk_north,  20, 32, 1, 8),
-			[DIR_SOUTH] = NewAnimation(IMG_knight_walk_south,  20, 32, 1, 8),
-			[DIR_EAST]  = NewAnimation(IMG_knight_walk_east,  20, 32, 1, 8),
-			[DIR_WEST]  = NewAnimation(IMG_knight_walk_west,  20, 32, 1, 8),
-		},
-		attack = {
-			[DIR_NORTH] = NewAnimation(IMG_knight_attack_north,  20, 32, 1, 8),
-			[DIR_SOUTH] = NewAnimation(IMG_knight_attack_south,  20, 32, 1, 8),
-			[DIR_EAST]  = NewAnimation(IMG_knight_attack_east,  20, 32, 1, 8),
-			[DIR_WEST]  = NewAnimation(IMG_knight_attack_west,  20, 32, 1, 8),
-		},
-		hit = {
-			[DIR_NORTH] = NewAnimation(IMG_knight_hit_north,  20, 32, 1, 8),
-			[DIR_SOUTH] = NewAnimation(IMG_knight_hit_south,  20, 32, 1, 8),
-			[DIR_EAST]  = NewAnimation(IMG_knight_hit_east,  20, 32, 1, 8),
-			[DIR_WEST]  = NewAnimation(IMG_knight_hit_west,  20, 32, 1, 8),
-		},
-		dead = {
-			[DIR_NORTH] = NewAnimation(IMG_knight_dead_north,  20, 32, 1, 8),
-			[DIR_SOUTH] = NewAnimation(IMG_knight_dead_south,  20, 32, 1, 8),
-			[DIR_EAST]  = NewAnimation(IMG_knight_dead_east,  20, 32, 1, 8),
-			[DIR_WEST]  = NewAnimation(IMG_knight_dead_west,  20, 32, 1, 8),
+		wizzard = {
+			walk = {
+				[DIR_NORTH] = NewAnimation(IMG_wizzard_walk_north,  20, 32, 1, 8),
+				[DIR_SOUTH] = NewAnimation(IMG_wizzard_walk_south,  20, 32, 1, 8),
+				[DIR_EAST]  = NewAnimation(IMG_wizzard_walk_east,  20, 32, 1, 8),
+				[DIR_WEST]  = NewAnimation(IMG_wizzard_walk_west,  20, 32, 1, 8),
+			},
+			attack = {
+				[DIR_NORTH] = NewAnimation(IMG_wizzard_attack_north,  20, 32, 1, 8),
+				[DIR_SOUTH] = NewAnimation(IMG_wizzard_attack_south,  20, 32, 1, 8),
+				[DIR_EAST]  = NewAnimation(IMG_wizzard_attack_east,  20, 32, 1, 8),
+				[DIR_WEST]  = NewAnimation(IMG_wizzard_attack_west,  20, 32, 1, 8),
+			},
+			hit = {
+				[DIR_NORTH] = NewAnimation(IMG_wizzard_hit_north,  20, 32, 1, 8),
+				[DIR_SOUTH] = NewAnimation(IMG_wizzard_hit_south,  20, 32, 1, 8),
+				[DIR_EAST]  = NewAnimation(IMG_wizzard_hit_east,  20, 32, 1, 8),
+				[DIR_WEST]  = NewAnimation(IMG_wizzard_hit_west,  20, 32, 1, 8),
+			},
+			dead = {
+				[DIR_NORTH] = NewAnimation(IMG_wizzard_dead_north,  20, 32, 1, 8),
+				[DIR_SOUTH] = NewAnimation(IMG_wizzard_dead_south,  20, 32, 1, 8),
+				[DIR_EAST]  = NewAnimation(IMG_wizzard_dead_east,  20, 32, 1, 8),
+				[DIR_WEST]  = NewAnimation(IMG_wizzard_dead_west,  20, 32, 1, 8),
+			},
 		},
 	}
-	n.anim = n.animations[n.stance][n.direction]
+	n.anim = n.animations[n.job][n.stance][n.direction]
 	return setmetatable(n, character)
 end
 
@@ -65,12 +87,12 @@ end
 
 function character:setStance(s)
 	self.stance = s
-	self.anim = self.animations[self.stance][self.direction]
+	self.anim = self.animations[self.job][self.stance][self.direction]
 end
 
 function character:setDirection(d)
 	self.direction = d
-	self.anim = self.animations[self.stance][self.direction]
+	self.anim = self.animations[self.job][self.stance][self.direction]
 end
 
 function character:move(path, endcb)
