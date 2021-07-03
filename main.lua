@@ -12,16 +12,14 @@ Cron = require "cron"
 Input = require "input"
 
 MAP = {
-	{0,0,0,0,0,0,0,0},
-	{0,1,1,1,1,1,1,0},
-	{0,1,1,1,1,0,1,0},
-	{0,1,0,1,1,0,1,0},
-	{0,0,0,1,1,1,1,0},
-	{0,0,1,1,0,0,1,0},
-	{0,1,1,1,1,1,1,0},
-	{0,1,1,1,1,1,1,0},
-	{0,1,1,1,1,1,1,0},
-	{0,0,0,0,0,0,0,0},
+	{0,1,1,1,1,1,1,1},
+	{1,1,1,1,1,0,1,1},
+	{1,1,1,1,1,0,1,0},
+	{1,0,1,1,1,1,0,0},
+	{1,0,1,1,1,0,0,0},
+	{1,1,1,1,1,1,0,0},
+	{1,1,1,1,1,1,1,1},
+	{1,1,1,1,1,1,1,0},
 }
 
 function love.load()
@@ -59,11 +57,6 @@ function love.load()
 	IMG_knight_dead_west = love.graphics.newImage("assets/knight_dead_west.png")
 	IMG_knight_dead_east = love.graphics.newImage("assets/knight_dead_east.png")
 
-	-- IMG_wizzard_stand_south = love.graphics.newImage("assets/wizzard_stand_south.png")
-	-- IMG_wizzard_stand_north = love.graphics.newImage("assets/wizzard_stand_north.png")
-	-- IMG_wizzard_stand_west = love.graphics.newImage("assets/wizzard_stand_west.png")
-	-- IMG_wizzard_stand_east = love.graphics.newImage("assets/wizzard_stand_east.png")
-
 	IMG_wizzard_walk_south = love.graphics.newImage("assets/wizzard_walk_south.png")
 	IMG_wizzard_walk_north = love.graphics.newImage("assets/wizzard_walk_north.png")
 	IMG_wizzard_walk_west = love.graphics.newImage("assets/wizzard_walk_west.png")
@@ -94,15 +87,15 @@ function love.load()
 	FNT_letters = love.graphics.newImageFont("assets/letters.png", "ABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789.!?")
 	love.graphics.setFont(FNT_letters)
 
-	table.insert(CHARS, NewCharacter({x=3, y=2, direction=DIR_WEST, period=15, at=1, team=1, job="knight"}))
-	table.insert(CHARS, NewCharacter({x=4, y=2, direction=DIR_WEST, period=10, at=3, team=1, job="wizzard"}))
-	table.insert(CHARS, NewCharacter({x=5, y=2, direction=DIR_WEST, period=10, at=5, team=1, job="wizzard"}))
-	table.insert(CHARS, NewCharacter({x=6, y=2, direction=DIR_WEST, period=15, at=7, team=1, job="knight"}))
+	table.insert(CHARS, NewCharacter({x=3, y=1, direction=DIR_WEST, period=15, at=1, team=1, job="knight"}))
+	table.insert(CHARS, NewCharacter({x=4, y=1, direction=DIR_WEST, period=10, at=3, team=1, job="wizzard"}))
+	table.insert(CHARS, NewCharacter({x=5, y=1, direction=DIR_WEST, period=10, at=5, team=1, job="wizzard"}))
+	table.insert(CHARS, NewCharacter({x=6, y=1, direction=DIR_WEST, period=15, at=7, team=1, job="knight"}))
 
-	table.insert(CHARS, NewCharacter({x=3, y=9, direction=DIR_EAST, period=15, at=2, team=2, job="knight"}))
-	table.insert(CHARS, NewCharacter({x=4, y=9, direction=DIR_EAST, period=10, at=4, team=2, job="wizzard"}))
-	table.insert(CHARS, NewCharacter({x=5, y=9, direction=DIR_EAST, period=10, at=6, team=2, job="wizzard"}))
-	table.insert(CHARS, NewCharacter({x=6, y=9, direction=DIR_EAST, period=15, at=8, team=2, job="knight"}))
+	table.insert(CHARS, NewCharacter({x=3, y=8, direction=DIR_EAST, period=15, at=2, team=2, job="knight"}))
+	table.insert(CHARS, NewCharacter({x=4, y=8, direction=DIR_EAST, period=10, at=4, team=2, job="wizzard"}))
+	table.insert(CHARS, NewCharacter({x=5, y=8, direction=DIR_EAST, period=10, at=6, team=2, job="wizzard"}))
+	table.insert(CHARS, NewCharacter({x=6, y=8, direction=DIR_EAST, period=15, at=8, team=2, job="knight"}))
 
 	CURSOR = NewCursor({x=1, y=1})
 end
