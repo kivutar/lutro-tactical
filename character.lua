@@ -5,7 +5,7 @@ function NewCharacter(n)
 	n.stance = "walk"
 	n.hasmoved = false
 	n.hasattacked = false
-	n.movement = 5
+	n.movement = 4
 	n.tweens = {}
 	n.crons = {}
 	if n.job == "knight" then

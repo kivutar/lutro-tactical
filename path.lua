@@ -42,17 +42,17 @@ function GetMovable(x, y)
 end
 
 function AddMovableToList(pos, list, range)
-	range = range - 1
 	if range <= 0 then return end
+	pos.visited = true
+	table.insert(list, pos)
 	for i = 1, #around do
 		local delta = around[i]
-		local adjacent = GetMovable(pos.x + delta.x, pos.y + delta.y)
-		if adjacent ~= nil then
-			if not adjacent.parent then
-				adjacent.parent = pos
+		local adj = GetMovable(pos.x + delta.x, pos.y + delta.y)
+		if adj ~= nil and not adj.visited then
+			if not adj.parent then
+				adj.parent = pos
 			end
-			table.insert(list, adjacent)
-			AddMovableToList(adjacent, list, range)
+			AddMovableToList(adj, list, range - 1)
 		end
 	end
 end
