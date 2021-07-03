@@ -76,6 +76,7 @@ function cursor:update(dt)
 					local okcb = function ()
 						ATTACKABLES = nil
 						MENU = nil
+						TARGETED = nil
 						local endcb = function ()
 							CHAR.hasattacked = true
 							CHAR:setStance("walk")
@@ -91,8 +92,10 @@ function cursor:update(dt)
 
 					local cancelcb = function ()
 						MENU = nil
+						TARGETED = nil
 					end
 
+					TARGETED = {self}
 					MENU = NewConfirmation({okcb=okcb, cancelcb=cancelcb})
 
 				end

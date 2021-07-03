@@ -35,6 +35,7 @@ function love.load()
 	IMG_at = love.graphics.newImage("assets/at.png")
 	IMG_movetile = love.graphics.newImage("assets/movetile.png")
 	IMG_attacktile = love.graphics.newImage("assets/attacktile.png")
+	IMG_targettile = love.graphics.newImage("assets/targettile.png")
 	IMG_direction = love.graphics.newImage("assets/direction.png")
 	IMG_direction_active = love.graphics.newImage("assets/direction_active.png")
 
@@ -84,6 +85,7 @@ function love.load()
 
 	ANIM_movetile = NewAnimation(IMG_movetile, 48, 24, 1, 4)
 	ANIM_attacktile = NewAnimation(IMG_attacktile, 48, 24, 1, 4)
+	ANIM_targettile = NewAnimation(IMG_targettile, 48, 24, 1, 4)
 
 	FNT_letters = love.graphics.newImageFont("assets/letters.png", "ABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789.!?")
 	love.graphics.setFont(FNT_letters)
@@ -122,6 +124,7 @@ function love.update(dt)
 
 	ANIM_movetile:update(dt)
 	ANIM_attacktile:update(dt)
+	ANIM_targettile:update(dt)
 
 	for i=1, #CHARS do
 		CHARS[i]:update(dt)
@@ -171,6 +174,13 @@ function love.draw()
 		for i=1, #ATTACKABLES do
 			local t = ATTACKABLES[i]
 			ANIM_attacktile:draw(t.x*THW - t.y*THW, t.x*THH + t.y*THH)
+		end
+	end
+
+	if TARGETED ~= nil then
+		for i=1, #TARGETED do
+			local t = TARGETED[i]
+			ANIM_targettile:draw(t.x*THW - t.y*THW, t.x*THH + t.y*THH)
 		end
 	end
 
