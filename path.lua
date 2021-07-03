@@ -76,6 +76,19 @@ function AddAttackableToList(pos, list, range)
 	end
 end
 
+function AddMagicableToList(pos, list)
+	for i = 1, #around do
+		local delta = around[i]
+		for range = 1, 8 do
+			local t = GetAttackable(pos.x + delta.x*range, pos.y + delta.y*range)
+			if t ~= nil then
+				t.parent = pos
+				table.insert(list, t)
+			end
+		end
+	end
+end
+
 function SelectMoveTile()
 	local movables = {}
 	local movement = CHAR.movement
@@ -88,6 +101,13 @@ function SelectAttackTile()
 	local attackables = {}
 	local rootpos = {x = CHAR.x, y = CHAR.y}
 	AddAttackableToList(rootpos, attackables, 2)
+	ATTACKABLES = attackables
+end
+
+function SelectMagicTile()
+	local attackables = {}
+	local rootpos = {x = CHAR.x, y = CHAR.y}
+	AddMagicableToList(rootpos, attackables)
 	ATTACKABLES = attackables
 end
 

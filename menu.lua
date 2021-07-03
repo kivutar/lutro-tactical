@@ -7,14 +7,19 @@ function NewMenu()
 	n.entries = {
 		{title="MOVE", callback=SelectMoveTile},
 		{title="ATTACK", callback=SelectAttackTile},
-		{title="WAIT", callback=Wait},
 	}
+	if CHAR.job == "wizzard" then
+		table.insert(n.entries, {title="MAGIC", callback=SelectMagicTile})
+	end
+	table.insert(n.entries, {title="WAIT", callback=Wait})
 	return setmetatable(n, menu)
 end
 
 function menu:isActionDisabled(i)
 	local e = self.entries[i]
-	return (e.title == "MOVE" and CHAR.hasmoved) or (e.title == "ATTACK" and CHAR.hasattacked)
+	return (e.title == "MOVE" and CHAR.hasmoved) or
+		(e.title == "ATTACK" and CHAR.hasattacked) or
+		(e.title == "MAGIC" and CHAR.hasattacked)
 end
 
 function menu:update(dt)
