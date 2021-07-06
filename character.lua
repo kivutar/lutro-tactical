@@ -4,7 +4,7 @@ character.__index = character
 function NewCharacter(n)
 	n.stance = "walk"
 	n.hasmoved = false
-	n.hasattacked = false
+	n.hasacted = false
 	n.movement = 4
 	n.tweens = {}
 	n.crons = {}
@@ -27,6 +27,12 @@ function NewCharacter(n)
 				[DIR_SOUTH] = NewAnimation(IMG_knight_attack_south,  20, 32, 1, 8),
 				[DIR_EAST]  = NewAnimation(IMG_knight_attack_east,  20, 32, 1, 8),
 				[DIR_WEST]  = NewAnimation(IMG_knight_attack_west,  20, 32, 1, 8),
+			},
+			jump = {
+				[DIR_NORTH] = NewAnimation(IMG_knight_jump_north,  20, 32, 1, 8),
+				[DIR_SOUTH] = NewAnimation(IMG_knight_jump_south,  20, 32, 1, 8),
+				[DIR_EAST]  = NewAnimation(IMG_knight_jump_east,  20, 32, 1, 8),
+				[DIR_WEST]  = NewAnimation(IMG_knight_jump_west,  20, 32, 1, 8),
 			},
 			hit = {
 				[DIR_NORTH] = NewAnimation(IMG_knight_hit_north,  20, 32, 1, 8),
@@ -53,6 +59,12 @@ function NewCharacter(n)
 				[DIR_SOUTH] = NewAnimation(IMG_wizzard_attack_south,  20, 32, 1, 8),
 				[DIR_EAST]  = NewAnimation(IMG_wizzard_attack_east,  20, 32, 1, 8),
 				[DIR_WEST]  = NewAnimation(IMG_wizzard_attack_west,  20, 32, 1, 8),
+			},
+			jump = {
+				[DIR_NORTH] = NewAnimation(IMG_wizzard_jump_north,  20, 32, 1, 8),
+				[DIR_SOUTH] = NewAnimation(IMG_wizzard_jump_south,  20, 32, 1, 8),
+				[DIR_EAST]  = NewAnimation(IMG_wizzard_jump_east,  20, 32, 1, 8),
+				[DIR_WEST]  = NewAnimation(IMG_wizzard_jump_west,  20, 32, 1, 8),
 			},
 			hit = {
 				[DIR_NORTH] = NewAnimation(IMG_wizzard_hit_north,  20, 32, 1, 8),
@@ -132,6 +144,20 @@ function character:attack(target, endcb)
 		else
 			target:setStance("walk")
 		end
+	end))
+end
+
+function character:heal(target, endcb)
+	local nextdir = GetNewDirection(self.x, self.y, target.x, target.y)
+	self:setDirection(nextdir)
+	self:setStance("jump")
+	table.insert(self.crons, Cron.after(1, endcb))
+	table.insert(self.crons, Cron.after(0.01, function ()
+		target:setStance("jump")
+	end))
+	table.insert(self.crons, Cron.after(0.5, function ()
+		target.hp = target.maxhp
+		target:setStance("walk")
 	end))
 end
 

@@ -49,6 +49,11 @@ function love.load()
 	IMG_knight_attack_west = love.graphics.newImage("assets/knight_attack_west.png")
 	IMG_knight_attack_east = love.graphics.newImage("assets/knight_attack_east.png")
 
+	IMG_knight_jump_south = love.graphics.newImage("assets/knight_jump_south.png")
+	IMG_knight_jump_north = love.graphics.newImage("assets/knight_jump_north.png")
+	IMG_knight_jump_west = love.graphics.newImage("assets/knight_jump_west.png")
+	IMG_knight_jump_east = love.graphics.newImage("assets/knight_jump_east.png")
+
 	IMG_knight_hit_south = love.graphics.newImage("assets/knight_hit_south.png")
 	IMG_knight_hit_north = love.graphics.newImage("assets/knight_hit_north.png")
 	IMG_knight_hit_west = love.graphics.newImage("assets/knight_hit_west.png")
@@ -68,6 +73,11 @@ function love.load()
 	IMG_wizzard_attack_north = love.graphics.newImage("assets/wizzard_attack_north.png")
 	IMG_wizzard_attack_west = love.graphics.newImage("assets/wizzard_attack_west.png")
 	IMG_wizzard_attack_east = love.graphics.newImage("assets/wizzard_attack_east.png")
+
+	IMG_wizzard_jump_south = love.graphics.newImage("assets/wizzard_jump_south.png")
+	IMG_wizzard_jump_north = love.graphics.newImage("assets/wizzard_jump_north.png")
+	IMG_wizzard_jump_west = love.graphics.newImage("assets/wizzard_jump_west.png")
+	IMG_wizzard_jump_east = love.graphics.newImage("assets/wizzard_jump_east.png")
 
 	IMG_wizzard_hit_south = love.graphics.newImage("assets/wizzard_hit_south.png")
 	IMG_wizzard_hit_north = love.graphics.newImage("assets/wizzard_hit_north.png")
@@ -112,7 +122,7 @@ function love.update(dt)
 				CHARS[i].at = CHARS[i].at - 1
 				if CHARS[i].at == 0 then
 					CHARS[i].hasmoved = false
-					CHARS[i].hasattacked = false
+					CHARS[i].hasacted = false
 					TIME_RUNNING = false
 					CHAR = CHARS[i]
 					CURSOR:warp(CHAR)
@@ -173,6 +183,13 @@ function love.draw()
 	if ATTACKABLES ~= nil then
 		for i=1, #ATTACKABLES do
 			local t = ATTACKABLES[i]
+			ANIM_attacktile:draw(t.x*THW - t.y*THW, t.x*THH + t.y*THH)
+		end
+	end
+
+	if HEALABLES ~= nil then
+		for i=1, #HEALABLES do
+			local t = HEALABLES[i]
 			ANIM_attacktile:draw(t.x*THW - t.y*THW, t.x*THH + t.y*THH)
 		end
 	end

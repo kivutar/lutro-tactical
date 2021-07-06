@@ -46,10 +46,10 @@ function cursor:update(dt)
 						MOVABLES = nil
 						MENU = nil
 						CHAR.hasmoved = true
-						if not CHAR.hasattacked then
+						if not CHAR.hasacted then
 							MENU = NewMenu()
 						end
-						if CHAR.hasmoved and CHAR.hasattacked then
+						if CHAR.hasmoved and CHAR.hasacted then
 							Wait()
 						end
 					end
@@ -78,16 +78,53 @@ function cursor:update(dt)
 						MENU = nil
 						TARGETED = nil
 						local endcb = function ()
-							CHAR.hasattacked = true
+							CHAR.hasacted = true
 							CHAR:setStance("walk")
 							if not CHAR.hasmoved then
 								MENU = NewMenu()
 							end
-							if CHAR.hasmoved and CHAR.hasattacked then
+							if CHAR.hasmoved and CHAR.hasacted then
 								Wait()
 							end
 						end
 						CHAR:attack(target, endcb)
+					end
+
+					local cancelcb = function ()
+						MENU = nil
+						TARGETED = nil
+					end
+
+					TARGETED = {self}
+					MENU = NewConfirmation({okcb=okcb, cancelcb=cancelcb})
+
+				end
+			end
+		elseif HEALABLES ~= nil then
+			for i = 1, #CHARS do
+				local target = CHARS[i]
+				local curr = CHAR
+				if target.x == self.x and target.y == self.y
+					and not (target.x == curr.x and target.y == curr.y)
+					and target.hp > 0 then
+
+					SFX_ok:play()
+
+					local okcb = function ()
+						HEALABLES = nil
+						MENU = nil
+						TARGETED = nil
+						local endcb = function ()
+							CHAR.hasacted = true
+							CHAR:setStance("walk")
+							if not CHAR.hasmoved then
+								MENU = NewMenu()
+							end
+							if CHAR.hasmoved and CHAR.hasacted then
+								Wait()
+							end
+						end
+						CHAR:heal(target, endcb)
 					end
 
 					local cancelcb = function ()

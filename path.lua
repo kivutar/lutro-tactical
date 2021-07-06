@@ -91,6 +91,22 @@ function AddMagicableToList(pos, list)
 	end
 end
 
+function AddHealableToList(pos, list, range)
+	if range <= 0 then return end
+	pos.visited = true
+	table.insert(list, pos)
+	for i = 1, #around do
+		local delta = around[i]
+		local adj = GetAttackable(pos.x + delta.x, pos.y + delta.y)
+		if adj ~= nil and not adj.visited then
+			if not adj.parent then
+				adj.parent = pos
+			end
+			AddHealableToList(adj, list, range - 1)
+		end
+	end
+end
+
 function SelectMoveTile()
 	local movables = {}
 	local movement = CHAR.movement
@@ -106,11 +122,18 @@ function SelectAttackTile()
 	ATTACKABLES = attackables
 end
 
-function SelectMagicTile()
+function SelectFireBallTile()
 	local attackables = {}
 	local rootpos = {x = CHAR.x, y = CHAR.y}
 	AddMagicableToList(rootpos, attackables)
 	ATTACKABLES = attackables
+end
+
+function SelectHealTile()
+	local healables = {}
+	local rootpos = {x = CHAR.x, y = CHAR.y}
+	AddHealableToList(rootpos, healables, 3)
+	HEALABLES = healables
 end
 
 function Wait()
