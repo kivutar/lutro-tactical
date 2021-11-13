@@ -29,7 +29,7 @@ return {
 			end
 		end
 	end,
-	isPressed = function (pad, btn)
+	isDown = function (pad, btn)
 		return state[pad][btn] > 0
 	end,
 	once = function (pad, btn)

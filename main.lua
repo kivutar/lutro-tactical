@@ -110,7 +110,7 @@ function love.load()
 	table.insert(CHARS, NewCharacter({x=5, y=8, direction=DIR_EAST, period=10, at=6, team=2, job="wizzard"}))
 	table.insert(CHARS, NewCharacter({x=6, y=8, direction=DIR_EAST, period=15, at=8, team=2, job="knight"}))
 
-	CURSOR = NewCursor({x=1, y=1})
+	CURSOR = NewCursor({x=1, y=1, pad=1})
 end
 
 function love.update(dt)
@@ -126,7 +126,7 @@ function love.update(dt)
 					TIME_RUNNING = false
 					CHAR = CHARS[i]
 					CURSOR:warp(CHAR)
-					MENU = NewMenu()
+					MENU = NewMenu({pad=CHAR.team})
 				end
 			end
 		end

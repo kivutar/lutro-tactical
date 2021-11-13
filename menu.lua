@@ -1,8 +1,7 @@
 local menu = {}
 menu.__index = menu
 
-function NewMenu()
-	local n = {}
+function NewMenu(n)
 	n.idx = 1
 	n.entries = {
 		{title="MOVE", callback=SelectMoveTile},
@@ -12,7 +11,7 @@ function NewMenu()
 		table.insert(n.entries, {title="FIREBALL", callback=SelectFireBallTile})
 		table.insert(n.entries, {title="HEAL", callback=SelectHealTile})
 	end
-	table.insert(n.entries, {title="WAIT", callback=Wait})
+	table.insert(n.entries, {title="WAIT", callback=function() Wait(n.pad) end})
 	return setmetatable(n, menu)
 end
 
@@ -25,11 +24,11 @@ function menu:isActionDisabled(i)
 end
 
 function menu:update(dt)
-	if Input.withCooldown(1, BTN_DOWN) then
+	if Input.withCooldown(self.pad, BTN_DOWN) then
 		self.idx = self.idx + 1
 		SFX_select:play()
 	end
-	if Input.withCooldown(1, BTN_UP) then
+	if Input.withCooldown(self.pad, BTN_UP) then
 		self.idx = self.idx - 1
 		SFX_select:play()
 	end
@@ -37,7 +36,7 @@ function menu:update(dt)
 	if self.idx < 1 then self.idx = 1 end
 	if self.idx >= #self.entries then self.idx = #self.entries end
 
-	if Input.once(1, BTN_A) then
+	if Input.once(self.pad, BTN_A) then
 		if not self:isActionDisabled(self.idx) then
 			SFX_ok:play()
 			MENU = nil
@@ -45,7 +44,7 @@ function menu:update(dt)
 		end
 	end
 
-	if Input.once(1, BTN_B) then
+	if Input.once(self.pad, BTN_B) then
 		SFX_cancel:play()
 		MENU = nil
 	end

@@ -7,26 +7,26 @@ function NewDirections(n)
 end
 
 function directions:update(dt)
-	if Input.once(1, BTN_DOWN) then
+	if Input.once(self.pad, BTN_DOWN) then
 		SFX_select:play()
 		DIRECTIONS_IDX = DIR_WEST
 	end
-	if Input.once(1, BTN_UP) then
+	if Input.once(self.pad, BTN_UP) then
 		SFX_select:play()
 		DIRECTIONS_IDX = DIR_EAST
 	end
-	if Input.once(1, BTN_LEFT) then
+	if Input.once(self.pad, BTN_LEFT) then
 		SFX_select:play()
 		DIRECTIONS_IDX = DIR_NORTH
 	end
-	if Input.once(1, BTN_RIGHT) then
+	if Input.once(self.pad, BTN_RIGHT) then
 		SFX_select:play()
 		DIRECTIONS_IDX = DIR_SOUTH
 	end
 
 	CHAR:setDirection(DIRECTIONS_IDX)
 
-	if Input.once(1, BTN_A) then
+	if Input.once(self.pad, BTN_A) then
 		SFX_ok:play()
 		DIRECTIONS = nil
 		TIME_RUNNING = true
@@ -37,7 +37,7 @@ function directions:update(dt)
 		end
 	end
 
-	if Input.once(1, BTN_B) then
+	if Input.once(self.pad, BTN_B) then
 		SFX_cancel:play()
 		DIRECTIONS = nil
 	end

@@ -136,8 +136,8 @@ function SelectHealTile()
 	HEALABLES = healables
 end
 
-function Wait()
-	DIRECTIONS = NewDirections({})
+function Wait(pad)
+	DIRECTIONS = NewDirections({pad=pad})
 	DIRECTIONS_IDX = CHAR.direction
 end
 

@@ -11,11 +11,11 @@ function NewConfirmation(n)
 end
 
 function confirmation:update(dt)
-	if Input.withCooldown(1, BTN_DOWN) then
+	if Input.withCooldown(self.pad, BTN_DOWN) then
 		self.idx = self.idx + 1
 		SFX_select:play()
 	end
-	if Input.withCooldown(1, BTN_UP) then
+	if Input.withCooldown(self.pad, BTN_UP) then
 		self.idx = self.idx - 1
 		SFX_select:play()
 	end
@@ -23,13 +23,13 @@ function confirmation:update(dt)
 	if self.idx < 1 then self.idx = 1 end
 	if self.idx >= #self.entries then self.idx = #self.entries end
 
-	if Input.once(1, BTN_A) then
+	if Input.once(self.pad, BTN_A) then
 		SFX_ok:play()
 		MENU = nil
 		self.entries[self.idx].callback()
 	end
 
-	if Input.once(1, BTN_B) then
+	if Input.once(self.pad, BTN_B) then
 		SFX_cancel:play()
 		MENU = nil
 	end

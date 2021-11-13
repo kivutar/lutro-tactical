@@ -14,24 +14,24 @@ end
 function cursor:update(dt)
 	self.t = self.t + 0.05
 
-	if Input.withCooldown(1, BTN_DOWN) then
+	if Input.withCooldown(self.pad, BTN_DOWN) then
 		self.y = self.y + 1
 		SFX_select:play()
 	end
-	if Input.withCooldown(1, BTN_UP) then
+	if Input.withCooldown(self.pad, BTN_UP) then
 		self.y = self.y - 1
 		SFX_select:play()
 	end
-	if Input.withCooldown(1, BTN_RIGHT) then
+	if Input.withCooldown(self.pad, BTN_RIGHT) then
 		self.x = self.x + 1
 		SFX_select:play()
 	end
-	if Input.withCooldown(1, BTN_LEFT) then
+	if Input.withCooldown(self.pad, BTN_LEFT) then
 		self.x = self.x - 1
 		SFX_select:play()
 	end
 
-	if Input.once(1, BTN_A) then
+	if Input.once(self.pad, BTN_A) then
 
 		if MOVABLES ~= nil then
 			local destination = TileIn(MOVABLES, self)
@@ -47,10 +47,10 @@ function cursor:update(dt)
 						MENU = nil
 						CHAR.hasmoved = true
 						if not CHAR.hasacted then
-							MENU = NewMenu()
+							MENU = NewMenu({pad=CHAR.team})
 						end
 						if CHAR.hasmoved and CHAR.hasacted then
-							Wait()
+							Wait(self.pad)
 						end
 					end
 					CHAR:move(path, endcb)
@@ -60,7 +60,7 @@ function cursor:update(dt)
 					MENU = nil
 				end
 
-				MENU = NewConfirmation({okcb=okcb, cancelcb=cancelcb})
+				MENU = NewConfirmation({okcb=okcb, cancelcb=cancelcb, pad=self.pad})
 
 			end
 		elseif ATTACKABLES ~= nil then
@@ -81,10 +81,10 @@ function cursor:update(dt)
 							CHAR.hasacted = true
 							CHAR:setStance("walk")
 							if not CHAR.hasmoved then
-								MENU = NewMenu()
+								MENU = NewMenu({pad=CHAR.team})
 							end
 							if CHAR.hasmoved and CHAR.hasacted then
-								Wait()
+								Wait(self.pad)
 							end
 						end
 						CHAR:attack(target, endcb)
@@ -96,7 +96,7 @@ function cursor:update(dt)
 					end
 
 					TARGETED = {self}
-					MENU = NewConfirmation({okcb=okcb, cancelcb=cancelcb})
+					MENU = NewConfirmation({okcb=okcb, cancelcb=cancelcb, pad=self.pad})
 
 				end
 			end
@@ -118,10 +118,10 @@ function cursor:update(dt)
 							CHAR.hasacted = true
 							CHAR:setStance("walk")
 							if not CHAR.hasmoved then
-								MENU = NewMenu()
+								MENU = NewMenu({pad=CHAR.team})
 							end
 							if CHAR.hasmoved and CHAR.hasacted then
-								Wait()
+								Wait(self.pad)
 							end
 						end
 						CHAR:heal(target, endcb)
@@ -142,13 +142,13 @@ function cursor:update(dt)
 				local char = CHARS[i]
 				if char.x == self.x and char.y == self.y and char.at == 0 then
 					SFX_ok:play()
-					MENU = NewMenu()
+					MENU = NewMenu({pad=CHAR.team})
 				end
 			end
 		end
 	end
 
-	if Input.once(1, BTN_B) then
+	if Input.once(self.pad, BTN_B) then
 		SFX_cancel:play()
 		if MOVABLES ~= nil then MOVABLES = nil end
 		if ATTACKABLES ~= nil then ATTACKABLES = nil end
